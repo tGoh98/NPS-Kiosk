@@ -4,10 +4,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
+require('dotenv').config(); //for api key
 const app = express();
 
 //API key
-const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33';
+const apiKey = process.env.API_KEY;
 
 //get access to public folder
 app.use(express.static('public'));
@@ -23,7 +24,8 @@ app.get('/', function (req, res) {
 
 app.post('/', function (req, res) {
   //let parkCode = req.body.parkCode;
-  let url = 'https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33';
+  let data = 'places';
+  let url = 'https://developer.nps.gov/api/v1/'+data+'?&api_key='+apiKey;
 
   request(url, function (err, response, body) {
     if(err){
