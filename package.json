@@ -4,7 +4,8 @@
   "description": "national parks api web app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,13 @@
     "ejs": "^2.6.1",
     "express": "^4.17.1",
     "request": "^2.88.0"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [
+    "National",
+    "Parks",
+    "API",
+    "web",
+    "application"
+  ]
 }
