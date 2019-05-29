@@ -11,3 +11,5 @@ This is a clean, fully-functional web application that assists the user in findi
 1. Ensure that [node js](https://nodejs.org/en/) is installed on your system
 2. Download and extract the repository
 3. Open git bash and start the local web server with the command `node server.js`
+---
+This was created for [Captial One's Coding Challenge](https://www.mindsumo.com/contests/national-park-api).
