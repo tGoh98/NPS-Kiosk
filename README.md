@@ -1,11 +1,11 @@
-# What is node-nps?
-This is a clean, fully-functional web application that assists the user in finding information about National Parks Service.
+# What is NPS-Kiosk?
+This is a clean, fully-functional web application that serves as a virtual kiosk to assist the user in finding information about the National Parks Service.
 
 ## Features
 * Efficient usage of the National Parks API
 * Intuitive, easy to navigate interface
-* Hidden API key via gitignore
 * Live deployed website on a custom Heroku domain. [Website](http://nps-api-webapp.herokuapp.com/)
+* Hidden API key via gitignore
 
 ## How to run
 1. Ensure that [node js](https://nodejs.org/en/) is installed on your system
