@@ -4,14 +4,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
-require('dotenv').config(); //for api key
 const app = express();
 
-//API key
+//get API key
+require('dotenv').config();
 const apiKey = process.env.API_KEY;
 
 //get access to public folder
-app.use(express.static('public'));
+app.use(express.static('assets'));
 //access bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 //set index.ejs
@@ -20,6 +20,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
   res.render('index');
+  console.log("at get");
 })
 
 app.post('/', function (req, res) {
