@@ -4,7 +4,9 @@ This is a web application that serves as a virtual kiosk to assist the user in f
 ## Features
 * Efficient usage of the National Parks API by using Node.js and ExpressJS
 * Intuitive, easy to navigate interface
-* Live deployed website on a custom Heroku domain. [Website](http://nps-api-webapp.herokuapp.com/)
+* Option to filter search results by state, designation, and keyword
+* Displays details about a park's visitor center, campgrounds, alerts, articles, events, news releases, and educational information (lesson plans, relevant people, and places)
+* Live deployed website on a custom Heroku domain: [http://nps-api-webapp.herokuapp.com/](http://nps-api-webapp.herokuapp.com/)
 * Hidden API key via gitignore
 
 ## How to run
