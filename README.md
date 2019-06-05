@@ -15,4 +15,5 @@ This is a web application that serves as a virtual kiosk to assist the user in f
 3. Open git bash and start the local web server with the command `node server.js`
 ---
 This was created for [Captial One's Coding Challenge](https://www.mindsumo.com/contests/national-park-api).
+
 Note: the front-end was based off a [template from HTML5up.net](https://html5up.net/story)
