@@ -25,8 +25,13 @@ app.get('/', function (req, res) {
 
 app.post('/', function (req, res) {
   //let parkCode = req.body.parkCode;
-  let data = 'places';
-  let url = 'https://developer.nps.gov/api/v1/'+data+'?&api_key='+apiKey;
+
+  let data = 'parks';
+  let stateCode = 'tx';
+  let q = req.body.q;
+  // let url = `https://developer.nps.gov/api/v1/${data}?stateCode=${stateCode}?q=${q}&api_key=${apiKey}`;
+  // let url = `https://developer.nps.gov/api/v1/${data}?stateCode=${stateCode}?&api_key=${apiKey}`; //works
+  let url = `https://developer.nps.gov/api/v1/${data}?stateCode=${stateCode}?&api_key=${apiKey}`;
 
   request(url, function (err, response, body) {
     if(err){
@@ -34,6 +39,7 @@ app.post('/', function (req, res) {
       console.log("error");
     } else {
       console.log(JSON.parse(body));
+      console.log("success");
       // let weather = JSON.parse(body)
       // if(weather.main == undefined){
       //   res.render('index', {weather: null, error: 'Error, please try again'});
