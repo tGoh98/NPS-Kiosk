@@ -24,6 +24,24 @@ app.get('/', function (req, res) {
 })
 
 app.post('/', function (req, res) {
+  const jsdom = require('jsdom');
+  const { JSDOM } = jsdom;
+  const dom = new JSDOM(``, {
+    url: "http://localhost:8000/",
+    // referrer: "https://example.com/",
+    // contentType: "text/html",
+    // includeNodeLocations: true,
+    // storageQuota: 10000000
+  });
+  // const { window } = new JSDOM();
+  const { document } = dom.window;
+  global.document = document;
+  var e = document.getElementById("state");
+  console.log(e);
+  // var stateCode = e.options[e.selectedIndex].text;
+  // console.log(stateCode);
+
+  //console.log(stateCode);
   //let parkCode = req.body.parkCode;
 
   let data = 'parks';
