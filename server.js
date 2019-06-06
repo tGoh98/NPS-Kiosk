@@ -24,32 +24,9 @@ app.get('/', function (req, res) {
 })
 
 app.post('/', function (req, res) {
-  const jsdom = require('jsdom');
-  const { JSDOM } = jsdom;
-  const dom = new JSDOM(``, {
-    url: "http://localhost:8000/",
-    // referrer: "https://example.com/",
-    // contentType: "text/html",
-    // includeNodeLocations: true,
-    // storageQuota: 10000000
-  });
-  // const { window } = new JSDOM();
-  const { document } = dom.window;
-  global.document = document;
-  var e = document.getElementById("state");
-  console.log(e);
-  // var stateCode = e.options[e.selectedIndex].text;
-  // console.log(stateCode);
-
-  //console.log(stateCode);
-  //let parkCode = req.body.parkCode;
-
-  let data = 'parks';
-  let stateCode = 'tx';
+  let stateCode = 'tx'; //replace with select value
   let q = req.body.q;
-  // let url = `https://developer.nps.gov/api/v1/${data}?stateCode=${stateCode}?q=${q}&api_key=${apiKey}`;
-  // let url = `https://developer.nps.gov/api/v1/${data}?stateCode=${stateCode}?&api_key=${apiKey}`; //works
-  let url = `https://developer.nps.gov/api/v1/${data}?stateCode=${stateCode}?&api_key=${apiKey}`;
+  let url = `https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`;
 
   request(url, function (err, response, body) {
     if(err){
