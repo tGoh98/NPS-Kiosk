@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index', {success: false});
   console.log("at get");
 })
 
@@ -35,7 +35,9 @@ app.post('/', function (req, res) {
     } else {
       console.log(JSON.parse(body));
       console.log("success");
-      // let weather = JSON.parse(body)
+
+      res.render('index', {success: true});
+
       // if(weather.main == undefined){
       //   res.render('index', {weather: null, error: 'Error, please try again'});
       // } else {
