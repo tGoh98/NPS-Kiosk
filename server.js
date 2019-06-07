@@ -12,6 +12,7 @@ const apiKey = process.env.API_KEY;
 
 //get access to public folder
 app.use(express.static('assets'));
+app.use(express.static('views'));
 //access bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 //set index.ejs
