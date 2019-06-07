@@ -1,34 +1,36 @@
 //server.js
 
-//node packages
+// Node packages
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
-//get API key
+// Get API key
 require('dotenv').config();
 const apiKey = process.env.API_KEY;
 
-//get access to public folder
+// Get access to folders
 app.use(express.static('assets'));
 app.use(express.static('views'));
-//access bodyParser
+// Access bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
-//set index.ejs
+// Set index.ejs
 app.set('view engine', 'ejs');
 
-
+// Render index on page load
 app.get('/', function (req, res) {
-  res.render('index', {success: false});
-  console.log("at get");
+  res.render('index', {anchor: false});
 })
 
+// Called when search form submitted
 app.post('/', function (req, res) {
+  // Construct api call
   let stateCode = 'tx'; //replace with select value
   let q = req.body.q;
   let url = `https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`;
 
+  // Call api
   request(url, function (err, response, body) {
     if(err){
       //res.render('index', {weather: null, error: 'Error, please try again'});
@@ -37,7 +39,7 @@ app.post('/', function (req, res) {
       console.log(JSON.parse(body));
       console.log("success");
 
-      res.render('index', {success: true});
+      res.render('index', {anchor: true});
 
       // if(weather.main == undefined){
       //   res.render('index', {weather: null, error: 'Error, please try again'});
@@ -49,11 +51,13 @@ app.post('/', function (req, res) {
   });
 })
 
+
+// Start server
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
 }
 
 app.listen(port, function () {
-  console.log('Example app listening on port '+port+'!');
+  console.log(`App listening on port ${port}!`);
 })

@@ -10,14 +10,15 @@
     <script>
       function goToResults() {
         var top = document.getElementById("results").offsetTop;
-        window.scrollTo(0, top);
+        window.scrollTo({ top: top, behavior: 'smooth' })
       }
     </script>
  	</head>
-  <% if(success == true){ %>
+  <!-- Hacky fix for anchor scrolling -->
+  <% if(anchor == true){ %>
  	<body class="is-preload" onload="goToResults()">
   <% } %>
-  <% if(success == false){ %>
+  <% if(anchor == false){ %>
  	<body class="is-preload">
   <% } %>
 
@@ -121,7 +122,6 @@
                   <option value="National Trail">National Trail</option>
                   <option value="Affiliated Areas">Affiliated Areas</option>
                 </select></li>
-                <li>Note: Only one option can be selected for state and designation to avoid too many search results.</li>
                 <li>Search term:
                 <form action="/" method="post">
                   <input name="q" type="text" placeholder="Enter a keyword e.g. &quot;Yellowstone&quot;" required>
@@ -136,7 +136,7 @@
 
           <!-- Search results -->
           <a id="results"></a>
-          <% if(success == true){ %>
+          <% if(anchor == true){ %>
             <section class="wrapper style1 align-center">
   						<div class="inner">
   							<h2>Massa sed condimentum</h2>
