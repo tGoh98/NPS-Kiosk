@@ -7,20 +7,9 @@
  		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
  		<link rel="stylesheet" type="text/css" href="css/main.css" />
  		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <script>
-      function goToResults() {
-        var top = document.getElementById("results").offsetTop;
-        window.scrollTo({ top: top, behavior: 'smooth' })
-      }
-    </script>
  	</head>
   <!-- Hacky fix for anchor scrolling -->
-  <% if(anchor == true){ %>
- 	<body class="is-preload" onload="goToResults()">
-  <% } %>
-  <% if(anchor == false){ %>
  	<body class="is-preload">
-  <% } %>
 
  		<!-- Wrapper -->
  			<div id="wrapper" class="divided">
@@ -136,7 +125,6 @@
 
           <!-- Search results -->
           <a id="results"></a>
-          <% if(anchor == true){ %>
             <section class="wrapper style1 align-center">
   						<div class="inner">
   							<h2>Massa sed condimentum</h2>
@@ -289,12 +277,10 @@
   								</article>
   							</div>
   					</section>
-            <div id="app">
-              {{ message }}
-            </div>
-          <% } %>
-
-
+          <div id="app">
+            <button v-on:click="search('param1')">search</button>
+            {{ info }}
+          </div>
 
  				<!-- Footer -->
  					<footer class="wrapper style1 align-center">
@@ -306,16 +292,17 @@
  			</div>
 
  		<!-- Scripts -->
- 			<script src="js/jquery.min.js"></script>
- 			<script src="js/jquery.scrollex.min.js"></script>
- 			<script src="js/jquery.scrolly.min.js"></script>
- 			<script src="js/browser.min.js"></script>
- 			<script src="js/breakpoints.min.js"></script>
- 			<script src="js/util.js"></script>
- 			<script src="js/main.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.scrollex.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="js/breakpoints.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/main.js"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-      <script src="vueTest.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
 
  	</body>
  </html>
