@@ -36,8 +36,7 @@ app.post('/', function (req, res) {
       //res.render('index', {weather: null, error: 'Error, please try again'});
       console.log("error");
     } else {
-      console.log(JSON.parse(body));
-      console.log("success");
+      exports.info = JSON.parse(body);
 
       res.render('index', {anchor: true});
 
