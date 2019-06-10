@@ -1,8 +1,10 @@
 
-new Vue({
-  el: '#app',
+var vm1 = new Vue({
+  el: '#wrapper',
   data: {
-    searchResult: 'test',
+    displayResults: false,
+    displayPark: false,
+    q: '',
     info: null,
     selectedState: { value: 'AL', text: "Alabama" },
     states: [
@@ -84,13 +86,27 @@ new Vue({
     ]
   },
   methods: {
-   search: function (param, event) {
+   search: function (param) {
+
      this.searchResult = param
-     alert(this.searchResult);
+     alert(this.searchResult)
 
      // API call
      const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33';
      axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=tx&q=flint&api_key=${apiKey}`).then(response => (this.info = response))
+
+     // Show results
+     this.displayResults = true
+     setTimeout(function(){
+       var top = document.getElementById("resultsSection").offsetTop
+       window.scrollTo({ top: top+80, behavior: 'smooth' })
+    }, 1000);
    }
  }
 })
+
+function doQuery() {
+  vm1.search('p1')
+  // alert(document.getElementById('asdf'))
+  // vm1.search(state, designation, q)
+}
