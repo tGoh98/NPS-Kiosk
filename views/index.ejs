@@ -28,7 +28,8 @@
   				</section>
 
   			<!-- Search -->
-				<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
+				<section class="spotlight style1 orient-right content-align-left image-position-center" id="first">
+          <!-- onscroll-image-fade-in is messing up when used with vue-->
 					<div class="content">
 						<h2>Find a Park</h2>
 						<ul class="actions stacked">
@@ -42,19 +43,17 @@
             <select v-model="selectedDesignation">
                 <option v-for="designation in designations" :value="designation">{{ designation.text }}</option>
             </select>
-            <div id="asdf">
               {{ selectedDesignation.text }}
-            </div>
             </li>
             <li>Search term:
             <input v-model="q" type="text" placeholder="Enter a keyword e.g. &quot;Yellowstone&quot;">
-            <button onclick="doQuery()" class="button fit">search</button>
+            <button v-on:click="search" class="button fit">search</button>
             <p>Message is: {{ q }}</p>
           </ul>
 					</div>
-        <!-- <div class="image"> -->
-          <img src="images/search_img.jpg" alt="grand canyon" />
-        <!-- </div> -->
+        <div class="image">
+          <img :src=url alt="grand canyon" />
+        </div>
 				</section>
 
 

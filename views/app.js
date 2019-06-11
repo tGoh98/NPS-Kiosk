@@ -1,7 +1,7 @@
-
-var vm1 = new Vue({
+new Vue({
   el: '#wrapper',
   data: {
+    url: 'images/search_img.jpg',
     displayResults: false,
     displayPark: false,
     q: '',
@@ -86,14 +86,18 @@ var vm1 = new Vue({
     ]
   },
   methods: {
-   search: function (param) {
-
-     this.searchResult = param
-     alert(this.searchResult)
+   search: function () {
+     // Get form values
+     let stateCode = this.selectedState.value
+     let designation = this.selectedDesignation.value
+     let q = this.q
+     console.log(stateCode)
+     console.log(designation)
+     console.log(q)
 
      // API call
      const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33';
-     axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=tx&q=flint&api_key=${apiKey}`).then(response => (this.info = response))
+     axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`).then(response => (this.info = response))
 
      // Show results
      this.displayResults = true
@@ -104,9 +108,3 @@ var vm1 = new Vue({
    }
  }
 })
-
-function doQuery() {
-  vm1.search('p1')
-  // alert(document.getElementById('asdf'))
-  // vm1.search(state, designation, q)
-}
