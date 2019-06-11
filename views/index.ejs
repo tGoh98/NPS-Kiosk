@@ -7,315 +7,237 @@
  		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
  		<link rel="stylesheet" type="text/css" href="css/main.css" />
  		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <script>
-      function goToResults() {
-        var top = document.getElementById("results").offsetTop;
-        window.scrollTo({ top: top, behavior: 'smooth' })
-      }
-    </script>
  	</head>
-  <!-- Hacky fix for anchor scrolling -->
-  <% if(anchor == true){ %>
- 	<body class="is-preload" onload="goToResults()">
-  <% } %>
-  <% if(anchor == false){ %>
+
  	<body class="is-preload">
-  <% } %>
-
  		<!-- Wrapper -->
- 			<div id="wrapper" class="divided">
+  		<div id="wrapper" class="divided">
 
- 				<!-- Intro -->
- 					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
- 						<div class="content">
- 							<h1>Virtual Kiosk</h1>
- 							<p class="major">Welcome to the National Parks Service virtual kiosk.</p>
- 							<ul class="actions stacked">
- 								<li><a href="#first" class="button big wide smooth-scroll-middle">Learn More About a Park!</a></li>
- 							</ul>
- 						</div>
- 						<div class="image">
- 							<img src="images/banner.jpg" alt="" />
- 						</div>
- 					</section>
+  			<!-- Intro -->
+  				<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+  					<div class="content">
+  						<h1>Virtual Kiosk</h1>
+  						<p class="major">Welcome to the National Parks Service virtual kiosk.</p>
+  						<ul class="actions stacked">
+  							<li><a href="#first" class="button big wide smooth-scroll-middle">Learn More About a Park!</a></li>
+  						</ul>
+  					</div>
+  					<div class="image">
+  						<img src="images/banner.jpg" alt="" />
+  					</div>
+  				</section>
 
- 				<!-- Search -->
- 					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
- 						<div class="content">
- 							<h2>Find a Park</h2>
- 							<ul class="actions stacked">
-                <li>State:
-                <select id="state">
-                  <option value="al">Alabama</option>
-                  <option value="ak">Alaska</option>
-                  <option value="as">American Samoa</option>
-                  <option value="az">Arizona</option>
-                  <option value="ar">Arkansas</option>
-                  <option value="ca">California</option>
-                  <option value="co">Colorado</option>
-                  <option value="ct">Connecticut</option>
-                  <option value="de">Delaware</option>
-                  <option value="dc">District of Columbia</option>
-                  <option value="fl">Florida</option>
-                  <option value="ga">Georgia</option>
-                  <option value="gm">Guam</option>
-                  <option value="hi">Hawaii</option>
-                  <option value="id">Idaho</option>
-                  <option value="il">Illinois</option>
-                  <option value="in">Indiana</option>
-                  <option value="ia">Iowa</option>
-                  <option value="ks">Kansas</option>
-                  <option value="ky">Kentucky</option>
-                  <option value="la">Louisiana</option>
-                  <option value="me">Maine</option>
-                  <option value="md">Maryland</option>
-                  <option value="ma">Massachusetts</option>
-                  <option value="mi">Michigan</option>
-                  <option value="mn">Minnesota</option>
-                  <option value="ms">Mississippi</option>
-                  <option value="mo">Missouri</option>
-                  <option value="mt">Montana</option>
-                  <option value="ne">Nebraska</option>
-                  <option value="nv">Nevada</option>
-                  <option value="nh">New Hampshire</option>
-                  <option value="nj">New Jersey</option>
-                  <option value="nm">New Mexico</option>
-                  <option value="ny">New York</option>
-                  <option value="nc">North Carolina</option>
-                  <option value="nd">North Dakota</option>
-                  <option value="nmi">Nothern Mariana Islands</option>
-                  <option value="oh">Ohio</option>
-                  <option value="ok">Oklahoma</option>
-                  <option value="or">Oregon</option>
-                  <option value="pa">Pennsylvania</option>
-                  <option value="pr">Puerto Rico</option>
-                  <option value="ri">Rhode Island</option>
-                  <option value="sc">South Carolina</option>
-                  <option value="sd">South Dakota</option>
-                  <option value="tn">Tennessee</option>
-                  <option value="tx">Texas</option>
-                  <option value="uvi">U.S. Virgin Islands</option>
-                  <option value="ut">Utah</option>
-                  <option value="vt">Vermont</option>
-                  <option value="va">Virginia</option>
-                  <option value="wa">Washington</option>
-                  <option value="wv">West Virginia</option>
-                  <option value="wi">Wisconsin</option>
-                  <option value="wy">Wyoming</option>
-                </select></li>
-                <li>Desgination:
-                <select id="designation">
-                  <option value="any">Any</option>
-                  <option value="National Park">National Park</option>
-                  <option value="National Monument">National Monument</option>
-                  <option value="National Preserve">National Preserve</option>
-                  <option value="National Historic Site">National Historic Site</option>
-                  <option value="National Historic Park">National Historic Park</option>
-                  <option value="National Memorial">National Memorial</option>
-                  <option value="National Battlefield">National Battlefield</option>
-                  <option value="National Cemetery">National Cemetery</option>
-                  <option value="National Recreation Area">National Recreation Area</option>
-                  <option value="National Seashore">National Seashore</option>
-                  <option value="National Lakeshore">National Lakeshore</option>
-                  <option value="National River">National River</option>
-                  <option value="National Parkway">National Parkway</option>
-                  <option value="National Trail">National Trail</option>
-                  <option value="Affiliated Areas">Affiliated Areas</option>
-                </select></li>
-                <li>Search term:
-                <form action="/" method="post">
-                  <input name="q" type="text" placeholder="Enter a keyword e.g. &quot;Yellowstone&quot;" required>
-                  <li><input type="submit" value="Search" class="button fit"></li>
-                </form></li>
-              </ul>
- 						</div>
- 						<div class="image">
- 							<img src="images/search_img.jpg" alt="" />
- 						</div>
- 					</section>
+  			<!-- Search -->
+				<section class="spotlight style1 orient-right content-align-left image-position-center" id="first">
+          <!-- onscroll-image-fade-in is messing up when used with vue-->
+					<div class="content">
+						<h2>Find a Park</h2>
+						<ul class="actions stacked">
+            <li>State:
+            <select v-model="selectedState">
+                <option v-for="state in states" :value="state">{{ state.text }}</option>
+            </select>
+            {{ selectedState.text }}
+            </li>
+            <li>Desgination:
+            <select v-model="selectedDesignation">
+                <option v-for="designation in designations" :value="designation">{{ designation.text }}</option>
+            </select>
+              {{ selectedDesignation.text }}
+            </li>
+            <li>Search term:
+            <input v-model="q" type="text" placeholder="Enter a keyword e.g. &quot;Yellowstone&quot;">
+            <button v-on:click="search" class="button fit">search</button>
+            <p>Message is: {{ q }}</p>
+          </ul>
+					</div>
+        <div class="image">
+          <img :src=url alt="grand canyon" />
+        </div>
+				</section>
 
-          <!-- Search results -->
-          <a id="results"></a>
-          <% if(anchor == true){ %>
-            <section class="wrapper style1 align-center">
-  						<div class="inner">
-  							<h2>Massa sed condimentum</h2>
-  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum.</p>
+
+        <!-- Search results -->
+        <a id="resultsSection"></a>
+          <section class="wrapper style1 align-center" v-if="displayResults">
+  					<div class="inner">
+  						<h2>Massa sed condimentum</h2>
+  						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum.</p>
+  					</div>
+  						<div class="gallery style2 medium lightbox onscroll-fade-in">
+  							<article>
+  								<a href="images/gallery/fulls/01.jpg" class="image">
+  									<img src="images/gallery/thumbs/01.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Ipsum Dolor</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/02.jpg" class="image">
+  									<img src="images/gallery/thumbs/02.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Feugiat Lorem</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/03.jpg" class="image">
+  									<img src="images/gallery/thumbs/03.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Magna Amet</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/04.jpg" class="image">
+  									<img src="images/gallery/thumbs/04.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Sed Tempus</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/05.jpg" class="image">
+  									<img src="images/gallery/thumbs/05.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Ultrices Magna</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/06.jpg" class="image">
+  									<img src="images/gallery/thumbs/06.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Sed Tempus</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/07.jpg" class="image">
+  									<img src="images/gallery/thumbs/07.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Ipsum Lorem</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/08.jpg" class="image">
+  									<img src="images/gallery/thumbs/08.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Magna Risus</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/09.jpg" class="image">
+  									<img src="images/gallery/thumbs/09.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Tempus Dolor</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/10.jpg" class="image">
+  									<img src="images/gallery/thumbs/10.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Sed Etiam</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/11.jpg" class="image">
+  									<img src="images/gallery/thumbs/11.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Magna Lorem</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
+  							<article>
+  								<a href="images/gallery/fulls/12.jpg" class="image">
+  									<img src="images/gallery/thumbs/12.jpg" alt="" />
+  								</a>
+  								<div class="caption">
+  									<h3>Ipsum Dolor</h3>
+  									<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+  									<ul class="actions fixed">
+  										<li><span class="button small">Details</span></li>
+  									</ul>
+  								</div>
+  							</article>
   						</div>
-  							<div class="gallery style2 medium lightbox onscroll-fade-in">
-  								<article>
-  									<a href="images/gallery/fulls/01.jpg" class="image">
-  										<img src="images/gallery/thumbs/01.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Ipsum Dolor</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/02.jpg" class="image">
-  										<img src="images/gallery/thumbs/02.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Feugiat Lorem</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/03.jpg" class="image">
-  										<img src="images/gallery/thumbs/03.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Magna Amet</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/04.jpg" class="image">
-  										<img src="images/gallery/thumbs/04.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Sed Tempus</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/05.jpg" class="image">
-  										<img src="images/gallery/thumbs/05.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Ultrices Magna</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/06.jpg" class="image">
-  										<img src="images/gallery/thumbs/06.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Sed Tempus</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/07.jpg" class="image">
-  										<img src="images/gallery/thumbs/07.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Ipsum Lorem</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/08.jpg" class="image">
-  										<img src="images/gallery/thumbs/08.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Magna Risus</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/09.jpg" class="image">
-  										<img src="images/gallery/thumbs/09.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Tempus Dolor</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/10.jpg" class="image">
-  										<img src="images/gallery/thumbs/10.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Sed Etiam</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/11.jpg" class="image">
-  										<img src="images/gallery/thumbs/11.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Magna Lorem</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  								<article>
-  									<a href="images/gallery/fulls/12.jpg" class="image">
-  										<img src="images/gallery/thumbs/12.jpg" alt="" />
-  									</a>
-  									<div class="caption">
-  										<h3>Ipsum Dolor</h3>
-  										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
-  										<ul class="actions fixed">
-  											<li><span class="button small">Details</span></li>
-  										</ul>
-  									</div>
-  								</article>
-  							</div>
-  					</section>
-            <div id="app">
-              {{ message }}
-            </div>
-          <% } %>
+  				</section>
 
+        <!-- Selected Park -->
+        <!-- v-if="displayPark" -->
 
+        <button v-on:click="search('param1')">search</button>
+        {{ info }}
+      </div>
 
- 				<!-- Footer -->
- 					<footer class="wrapper style1 align-center">
- 						<div class="inner">
- 							<p>&copy; Timothy Goh. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
- 						</div>
- 					</footer>
-
- 			</div>
+  			<!-- Footer -->
+  				<footer class="wrapper style1 align-center">
+  					<div class="inner">
+  						<p>&copy; Timothy Goh. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+  					</div>
+  				</footer>
 
  		<!-- Scripts -->
- 			<script src="js/jquery.min.js"></script>
- 			<script src="js/jquery.scrollex.min.js"></script>
- 			<script src="js/jquery.scrolly.min.js"></script>
- 			<script src="js/browser.min.js"></script>
- 			<script src="js/breakpoints.min.js"></script>
- 			<script src="js/util.js"></script>
- 			<script src="js/main.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.scrollex.min.js"></script>
+		<script src="js/jquery.scrolly.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="js/breakpoints.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/main.js"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-      <script src="vueTest.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
 
  	</body>
  </html>
