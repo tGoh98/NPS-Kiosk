@@ -4,338 +4,454 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-(function($) {
+new Vue({
+  el: '#wrapper',
+  data: {
+    url: 'images/search_img.jpg',
+    displayResults: false,
+    displayPark: false,
+    q: '',
+    info: null,
+    selectedState: { value: 'AL', text: "Alabama" },
+    states: [
+      { value: 'AL', text: 'Alabama' },
+      { value: 'AK', text: 'Alaska' },
+      { value: 'AS', text: 'American Samoa' },
+      { value: 'AZ', text: 'Arizona' },
+      { value: 'AR', text: 'Arkansas' },
+      { value: 'CA', text: 'California' },
+      { value: 'CO', text: 'Colorado' },
+      { value: 'CT', text: 'Connecticut' },
+      { value: 'DE', text: 'Delaware' },
+      { value: 'DC', text: 'District of Columbia' },
+      { value: 'FL', text: 'Florida' },
+      { value: 'GA', text: 'Georgia' },
+      { value: 'GU', text: 'Guam' },
+      { value: 'HI', text: 'Hawaii' },
+      { value: 'ID', text: 'Idaho' },
+      { value: 'IL', text: 'Illinois' },
+      { value: 'IN', text: 'Indiana' },
+      { value: 'IA', text: 'Iowa' },
+      { value: 'KS', text: 'Kansas' },
+      { value: 'KY', text: 'Kentucky' },
+      { value: 'LA', text: 'Louisiana' },
+      { value: 'ME', text: 'Maine' },
+      { value: 'MD', text: 'Maryland' },
+      { value: 'MA', text: 'Massachusetts' },
+      { value: 'MI', text: 'Michigan' },
+      { value: 'MN', text: 'Minnesota' },
+      { value: 'MS', text: 'Mississippi' },
+      { value: 'MO', text: 'Missouri' },
+      { value: 'MT', text: 'Montana' },
+      { value: 'NE', text: 'Nebraska' },
+      { value: 'NV', text: 'Nevada' },
+      { value: 'NH', text: 'New Hampshire' },
+      { value: 'NJ', text: 'New Jersey' },
+      { value: 'NM', text: 'New Mexico' },
+      { value: 'NY', text: 'New York' },
+      { value: 'NC', text: 'North Carolina' },
+      { value: 'ND', text: 'North Dakota' },
+      { value: 'MP', text: 'Northern Mariana Islands' },
+      { value: 'OH', text: 'Ohio' },
+      { value: 'OK', text: 'Oklahoma' },
+      { value: 'OR', text: 'Oregon' },
+      { value: 'PA', text: 'Pennsylvania' },
+      { value: 'PR', text: 'Puerto Rico' },
+      { value: 'RI', text: 'Rhode Island' },
+      { value: 'SC', text: 'South Carolina' },
+      { value: 'SD', text: 'South Dakota' },
+      { value: 'TN', text: 'Tennessee' },
+      { value: 'TX', text: 'Texas' },
+      { value: 'VI', text: 'U.S. Virgin Islands' },
+      { value: 'UT', text: 'Utah' },
+      { value: 'VT', text: 'Vermont' },
+      { value: 'VA', text: 'Virginia' },
+      { value: 'WA', text: 'Washington' },
+      { value: 'WV', text: 'West Virginia' },
+      { value: 'WI', text: 'Wisconsin' },
+      { value: 'WY', text: 'Wyoming' }
+    ],
+    selectedDesignation: { value: 'Any', text: 'Any' },
+    designations: [
+      { value: 'Any', text: 'Any' },
+      { value: 'National Park', text: 'National Park' },
+      { value: 'National Monument', text: 'National Monument' },
+      { value: 'National Preserve', text: 'National Preserve' },
+      { value: 'National Historic Site', text: 'National Historic Site' },
+      { value: 'National Historic Park', text: 'National Historic Park' },
+      { value: 'National Memorial', text: 'National Memorial' },
+      { value: 'National Battlefield', text: 'National Battlefield' },
+      { value: 'National Cemetery', text: 'National Cemetery' },
+      { value: 'National Recreation Area', text: 'National Recreation Area' },
+      { value: 'National Seashore', text: 'National Seashore' },
+      { value: 'National Lakeshore', text: 'National Lakeshore' },
+      { value: 'National River', text: 'National River' },
+      { value: 'National Parkway', text: 'National Parkway' },
+      { value: 'National Trail', text: 'National Trail' },
+      { value: 'Affiliated Areas', text: 'Affiliated Areas' }
+    ]
+  },
+  methods: {
+   search: function () {
+     // Get form values
+     let stateCode = this.selectedState.value
+     let designation = this.selectedDesignation.value
+     let q = this.q
+
+     // API call
+     const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33';
+     axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`).then(response => (this.info = response))
+     console.log(this.info);
+
+     // Filter results by selected designation
+     if(designation != "Any") {
+       // Filter this.info
+     }
 
-	var	$window = $(window),
-		$body = $('body'),
-		$wrapper = $('#wrapper');
+     // Show results
+     this.displayResults = true
+     setTimeout(function(){
+       var top = document.getElementById("resultsSection").offsetTop
+       window.scrollTo({ top: top+80, behavior: 'smooth' })
+    }, 1000);
+   }
+ },
+ mounted () {
 
-	// Breakpoints.
-		breakpoints({
-			xlarge:   [ '1281px',  '1680px' ],
-			large:    [ '981px',   '1280px' ],
-			medium:   [ '737px',   '980px'  ],
-			small:    [ '481px',   '736px'  ],
-			xsmall:   [ '361px',   '480px'  ],
-			xxsmall:  [ null,      '360px'  ]
-		});
+	 (function($) {
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+	 	var	$window = $(window),
+	 		$body = $('body'),
+	 		$wrapper = $('#wrapper');
 
-	// Browser fixes.
+	 	// Breakpoints.
+	 		breakpoints({
+	 			xlarge:   [ '1281px',  '1680px' ],
+	 			large:    [ '981px',   '1280px' ],
+	 			medium:   [ '737px',   '980px'  ],
+	 			small:    [ '481px',   '736px'  ],
+	 			xsmall:   [ '361px',   '480px'  ],
+	 			xxsmall:  [ null,      '360px'  ]
+	 		});
+
+	 	// Play initial animations on page load.
+	 		$window.on('load', function() {
+	 			window.setTimeout(function() {
+	 				$body.removeClass('is-preload');
+	 			}, 100);
+	 		});
 
-		// IE: Flexbox min-height bug.
-			if (browser.name == 'ie')
-				(function() {
+	 	// Browser fixes.
+
+	 		// IE: Flexbox min-height bug.
+	 			if (browser.name == 'ie')
+	 				(function() {
+
+	 					var flexboxFixTimeoutId;
+
+	 					$window.on('resize.flexbox-fix', function() {
+
+	 						var $x = $('.fullscreen');
+
+	 						clearTimeout(flexboxFixTimeoutId);
+
+	 						flexboxFixTimeoutId = setTimeout(function() {
+
+	 							if ($x.prop('scrollHeight') > $window.height())
+	 								$x.css('height', 'auto');
+	 							else
+	 								$x.css('height', '100vh');
+
+	 						}, 250);
+
+	 					}).triggerHandler('resize.flexbox-fix');
+
+	 				})();
+
+	 		// Object fit workaround.
+	 			if (!browser.canUse('object-fit'))
+	 				(function() {
+
+	 					$('.banner .image, .spotlight .image').each(function() {
+
+	 						var $this = $(this),
+	 							$img = $this.children('img'),
+	 							positionClass = $this.parent().attr('class').match(/image-position-([a-z]+)/);
+
+	 						// Set image.
+	 							$this
+	 								.css('background-image', 'url("' + $img.attr('src') + '")')
+	 								.css('background-repeat', 'no-repeat')
+	 								.css('background-size', 'cover');
+
+	 						// Set position.
+	 							switch (positionClass.length > 1 ? positionClass[1] : '') {
+
+	 								case 'left':
+	 									$this.css('background-position', 'left');
+	 									break;
+
+	 								case 'right':
+	 									$this.css('background-position', 'right');
+	 									break;
+
+	 								default:
+	 								case 'center':
+	 									$this.css('background-position', 'center');
+	 									break;
+
+	 							}
+
+	 						// Hide original.
+	 							$img.css('opacity', '0');
+
+	 					});
+
+	 				})();
+
+	 	// Smooth scroll.
+	 		$('.smooth-scroll').scrolly();
+	 		$('.smooth-scroll-middle').scrolly({ anchor: 'middle' });
+
+	 	// Wrapper.
+	 		$wrapper.children()
+	 			.scrollex({
+	 				top:		'30vh',
+	 				bottom:		'30vh',
+	 				initialize:	function() {
+	 					$(this).addClass('is-inactive');
+	 				},
+	 				terminate:	function() {
+	 					$(this).removeClass('is-inactive');
+	 				},
+	 				enter:		function() {
+	 					$(this).removeClass('is-inactive');
+	 				},
+	 				leave:		function() {
+
+	 					var $this = $(this);
+
+	 					if ($this.hasClass('onscroll-bidirectional'))
+	 						$this.addClass('is-inactive');
+
+	 				}
+	 			});
+
+	 	// Items.
+	 		$('.items')
+	 			.scrollex({
+	 				top:		'30vh',
+	 				bottom:		'30vh',
+	 				delay:		50,
+	 				initialize:	function() {
+	 					$(this).addClass('is-inactive');
+	 				},
+	 				terminate:	function() {
+	 					$(this).removeClass('is-inactive');
+	 				},
+	 				enter:		function() {
+	 					$(this).removeClass('is-inactive');
+	 				},
+	 				leave:		function() {
+
+	 					var $this = $(this);
+
+	 					if ($this.hasClass('onscroll-bidirectional'))
+	 						$this.addClass('is-inactive');
+
+	 				}
+	 			})
+	 			.children()
+	 				.wrapInner('<div class="inner"></div>');
+
+	 	// Gallery.
+	 		$('.gallery')
+	 			.wrapInner('<div class="inner"></div>')
+	 			.prepend(browser.mobile ? '' : '<div class="forward"></div><div class="backward"></div>')
+	 			.scrollex({
+	 				top:		'30vh',
+	 				bottom:		'30vh',
+	 				delay:		50,
+	 				initialize:	function() {
+	 					$(this).addClass('is-inactive');
+	 				},
+	 				terminate:	function() {
+	 					$(this).removeClass('is-inactive');
+	 				},
+	 				enter:		function() {
+	 					$(this).removeClass('is-inactive');
+	 				},
+	 				leave:		function() {
+
+	 					var $this = $(this);
+
+	 					if ($this.hasClass('onscroll-bidirectional'))
+	 						$this.addClass('is-inactive');
+
+	 				}
+	 			})
+	 			.children('.inner')
+	 				//.css('overflow', 'hidden')
+	 				.css('overflow-y', browser.mobile ? 'visible' : 'hidden')
+	 				.css('overflow-x', browser.mobile ? 'scroll' : 'hidden')
+	 				.scrollLeft(0);
+
+	 		// Style #1.
+	 			// ...
+
+	 		// Style #2.
+	 			$('.gallery')
+	 				.on('wheel', '.inner', function(event) {
+
+	 					var	$this = $(this),
+	 						delta = (event.originalEvent.deltaX * 10);
+
+	 					// Cap delta.
+	 						if (delta > 0)
+	 							delta = Math.min(25, delta);
+	 						else if (delta < 0)
+	 							delta = Math.max(-25, delta);
+
+	 					// Scroll.
+	 						$this.scrollLeft( $this.scrollLeft() + delta );
+
+	 				})
+	 				.on('mouseenter', '.forward, .backward', function(event) {
+
+	 					var $this = $(this),
+	 						$inner = $this.siblings('.inner'),
+	 						direction = ($this.hasClass('forward') ? 1 : -1);
+
+	 					// Clear move interval.
+	 						clearInterval(this._gallery_moveIntervalId);
 
-					var flexboxFixTimeoutId;
-
-					$window.on('resize.flexbox-fix', function() {
-
-						var $x = $('.fullscreen');
-
-						clearTimeout(flexboxFixTimeoutId);
-
-						flexboxFixTimeoutId = setTimeout(function() {
-
-							if ($x.prop('scrollHeight') > $window.height())
-								$x.css('height', 'auto');
-							else
-								$x.css('height', '100vh');
-
-						}, 250);
-
-					}).triggerHandler('resize.flexbox-fix');
-
-				})();
-
-		// Object fit workaround.
-			if (!browser.canUse('object-fit'))
-				(function() {
-
-					$('.banner .image, .spotlight .image').each(function() {
-
-						var $this = $(this),
-							$img = $this.children('img'),
-							positionClass = $this.parent().attr('class').match(/image-position-([a-z]+)/);
-
-						// Set image.
-							$this
-								.css('background-image', 'url("' + $img.attr('src') + '")')
-								.css('background-repeat', 'no-repeat')
-								.css('background-size', 'cover');
-
-						// Set position.
-							switch (positionClass.length > 1 ? positionClass[1] : '') {
-
-								case 'left':
-									$this.css('background-position', 'left');
-									break;
-
-								case 'right':
-									$this.css('background-position', 'right');
-									break;
-
-								default:
-								case 'center':
-									$this.css('background-position', 'center');
-									break;
-
-							}
-
-						// Hide original.
-							$img.css('opacity', '0');
-
-					});
-
-				})();
-
-	// Smooth scroll.
-		$('.smooth-scroll').scrolly();
-		$('.smooth-scroll-middle').scrolly({ anchor: 'middle' });
-
-	// Wrapper.
-		$wrapper.children()
-			.scrollex({
-				top:		'30vh',
-				bottom:		'30vh',
-				initialize:	function() {
-					$(this).addClass('is-inactive');
-				},
-				terminate:	function() {
-					$(this).removeClass('is-inactive');
-				},
-				enter:		function() {
-					$(this).removeClass('is-inactive');
-				},
-				leave:		function() {
-
-					var $this = $(this);
-
-					if ($this.hasClass('onscroll-bidirectional'))
-						$this.addClass('is-inactive');
-
-				}
-			});
-
-	// Items.
-		$('.items')
-			.scrollex({
-				top:		'30vh',
-				bottom:		'30vh',
-				delay:		50,
-				initialize:	function() {
-					$(this).addClass('is-inactive');
-				},
-				terminate:	function() {
-					$(this).removeClass('is-inactive');
-				},
-				enter:		function() {
-					$(this).removeClass('is-inactive');
-				},
-				leave:		function() {
-
-					var $this = $(this);
-
-					if ($this.hasClass('onscroll-bidirectional'))
-						$this.addClass('is-inactive');
-
-				}
-			})
-			.children()
-				.wrapInner('<div class="inner"></div>');
-
-	// Gallery.
-		$('.gallery')
-			.wrapInner('<div class="inner"></div>')
-			.prepend(browser.mobile ? '' : '<div class="forward"></div><div class="backward"></div>')
-			.scrollex({
-				top:		'30vh',
-				bottom:		'30vh',
-				delay:		50,
-				initialize:	function() {
-					$(this).addClass('is-inactive');
-				},
-				terminate:	function() {
-					$(this).removeClass('is-inactive');
-				},
-				enter:		function() {
-					$(this).removeClass('is-inactive');
-				},
-				leave:		function() {
-
-					var $this = $(this);
-
-					if ($this.hasClass('onscroll-bidirectional'))
-						$this.addClass('is-inactive');
-
-				}
-			})
-			.children('.inner')
-				//.css('overflow', 'hidden')
-				.css('overflow-y', browser.mobile ? 'visible' : 'hidden')
-				.css('overflow-x', browser.mobile ? 'scroll' : 'hidden')
-				.scrollLeft(0);
-
-		// Style #1.
-			// ...
-
-		// Style #2.
-			$('.gallery')
-				.on('wheel', '.inner', function(event) {
-
-					var	$this = $(this),
-						delta = (event.originalEvent.deltaX * 10);
-
-					// Cap delta.
-						if (delta > 0)
-							delta = Math.min(25, delta);
-						else if (delta < 0)
-							delta = Math.max(-25, delta);
-
-					// Scroll.
-						$this.scrollLeft( $this.scrollLeft() + delta );
-
-				})
-				.on('mouseenter', '.forward, .backward', function(event) {
-
-					var $this = $(this),
-						$inner = $this.siblings('.inner'),
-						direction = ($this.hasClass('forward') ? 1 : -1);
-
-					// Clear move interval.
-						clearInterval(this._gallery_moveIntervalId);
-
-					// Start interval.
-						this._gallery_moveIntervalId = setInterval(function() {
-							$inner.scrollLeft( $inner.scrollLeft() + (5 * direction) );
-						}, 10);
-
-				})
-				.on('mouseleave', '.forward, .backward', function(event) {
-
-					// Clear move interval.
-						clearInterval(this._gallery_moveIntervalId);
-
-				});
-
-		// Lightbox.
-			$('.gallery.lightbox')
-				.on('click', 'a', function(event) {
+	 					// Start interval.
+	 						this._gallery_moveIntervalId = setInterval(function() {
+	 							$inner.scrollLeft( $inner.scrollLeft() + (5 * direction) );
+	 						}, 10);
 
-					var $a = $(this),
-						$gallery = $a.parents('.gallery'),
-						$modal = $gallery.children('.modal'),
-						$modalImg = $modal.find('img'),
-						href = $a.attr('href');
-
-					// Not an image? Bail.
-						if (!href.match(/\.(jpg|gif|png|mp4)$/))
-							return;
+	 				})
+	 				.on('mouseleave', '.forward, .backward', function(event) {
 
-					// Prevent default.
-						event.preventDefault();
-						event.stopPropagation();
+	 					// Clear move interval.
+	 						clearInterval(this._gallery_moveIntervalId);
 
-					// Locked? Bail.
-						if ($modal[0]._locked)
-							return;
+	 				});
 
-					// Lock.
-						$modal[0]._locked = true;
+	 		// Lightbox.
+	 			$('.gallery.lightbox')
+	 				.on('click', 'a', function(event) {
 
-					// Set src.
-						$modalImg.attr('src', href);
+	 					var $a = $(this),
+	 						$gallery = $a.parents('.gallery'),
+	 						$modal = $gallery.children('.modal'),
+	 						$modalImg = $modal.find('img'),
+	 						href = $a.attr('href');
 
-					// Set visible.
-						$modal.addClass('visible');
+	 					// Not an image? Bail.
+	 						if (!href.match(/\.(jpg|gif|png|mp4)$/))
+	 							return;
 
-					// Focus.
-						$modal.focus();
+	 					// Prevent default.
+	 						event.preventDefault();
+	 						event.stopPropagation();
 
-					// Delay.
-						setTimeout(function() {
+	 					// Locked? Bail.
+	 						if ($modal[0]._locked)
+	 							return;
 
-							// Unlock.
-								$modal[0]._locked = false;
+	 					// Lock.
+	 						$modal[0]._locked = true;
 
-						}, 600);
+	 					// Set src.
+	 						$modalImg.attr('src', href);
 
-				})
-				.on('click', '.modal', function(event) {
+	 					// Set visible.
+	 						$modal.addClass('visible');
 
-					var $modal = $(this),
-						$modalImg = $modal.find('img');
+	 					// Focus.
+	 						$modal.focus();
 
-					// Locked? Bail.
-						if ($modal[0]._locked)
-							return;
+	 					// Delay.
+	 						setTimeout(function() {
 
-					// Already hidden? Bail.
-						if (!$modal.hasClass('visible'))
-							return;
+	 							// Unlock.
+	 								$modal[0]._locked = false;
 
-					// Lock.
-						$modal[0]._locked = true;
+	 						}, 600);
 
-					// Clear visible, loaded.
-						$modal
-							.removeClass('loaded')
+	 				})
+	 				.on('click', '.modal', function(event) {
 
-					// Delay.
-						setTimeout(function() {
+	 					var $modal = $(this),
+	 						$modalImg = $modal.find('img');
 
-							$modal
-								.removeClass('visible')
+	 					// Locked? Bail.
+	 						if ($modal[0]._locked)
+	 							return;
 
-							setTimeout(function() {
+	 					// Already hidden? Bail.
+	 						if (!$modal.hasClass('visible'))
+	 							return;
 
-								// Clear src.
-									$modalImg.attr('src', '');
+	 					// Lock.
+	 						$modal[0]._locked = true;
 
-								// Unlock.
-									$modal[0]._locked = false;
+	 					// Clear visible, loaded.
+	 						$modal
+	 							.removeClass('loaded')
 
-								// Focus.
-									$body.focus();
+	 					// Delay.
+	 						setTimeout(function() {
 
-							}, 475);
+	 							$modal
+	 								.removeClass('visible')
 
-						}, 125);
+	 							setTimeout(function() {
 
-				})
-				.on('keypress', '.modal', function(event) {
+	 								// Clear src.
+	 									$modalImg.attr('src', '');
 
-					var $modal = $(this);
+	 								// Unlock.
+	 									$modal[0]._locked = false;
 
-					// Escape? Hide modal.
-						if (event.keyCode == 27)
-							$modal.trigger('click');
+	 								// Focus.
+	 									$body.focus();
 
-				})
-				.prepend('<div class="modal" tabIndex="-1"><div class="inner"><img src="" /></div></div>')
-					.find('img')
-						.on('load', function(event) {
+	 							}, 475);
 
-							var $modalImg = $(this),
-								$modal = $modalImg.parents('.modal');
+	 						}, 125);
 
-							setTimeout(function() {
+	 				})
+	 				.on('keypress', '.modal', function(event) {
 
-								// No longer visible? Bail.
-									if (!$modal.hasClass('visible'))
-										return;
+	 					var $modal = $(this);
 
-								// Set loaded.
-									$modal.addClass('loaded');
+	 					// Escape? Hide modal.
+	 						if (event.keyCode == 27)
+	 							$modal.trigger('click');
 
-							}, 275);
+	 				})
+	 				.prepend('<div class="modal" tabIndex="-1"><div class="inner"><img src="" /></div></div>')
+	 					.find('img')
+	 						.on('load', function(event) {
 
-						});
+	 							var $modalImg = $(this),
+	 								$modal = $modalImg.parents('.modal');
 
-})(jQuery);
+	 							setTimeout(function() {
+
+	 								// No longer visible? Bail.
+	 									if (!$modal.hasClass('visible'))
+	 										return;
+
+	 								// Set loaded.
+	 									$modal.addClass('loaded');
+
+	 							}, 275);
+
+	 						});
+
+	 })(jQuery);
+ }
+})

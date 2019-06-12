@@ -1,7 +1,7 @@
 new Vue({
   el: '#wrapper',
   data: {
-    url: 'images/search_img.jpg',
+    url: 'images/search_img.jpg', // doesn't fix onscroll issue
     displayResults: false,
     displayPark: false,
     q: '',
@@ -91,13 +91,16 @@ new Vue({
      let stateCode = this.selectedState.value
      let designation = this.selectedDesignation.value
      let q = this.q
-     console.log(stateCode)
-     console.log(designation)
-     console.log(q)
 
      // API call
      const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33';
      axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`).then(response => (this.info = response))
+     console.log(this.info);
+
+     // Filter results by selected designation
+     if(designation != "Any") {
+       // Filter this.info
+     }
 
      // Show results
      this.displayResults = true
