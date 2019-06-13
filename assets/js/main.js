@@ -10,6 +10,7 @@ new Vue({
     url: 'images/search_img.jpg',
     displayResults: false,
     displayPark: false,
+    emptyField: false,
     q: '',
     info: null,
     selectedState: { value: 'AL', text: "Alabama" },
@@ -121,7 +122,13 @@ new Vue({
     }, 100);
   },
   trySearch: function () {
-    this.search()
+    // Check if search term input field is empty
+    if(this.q == '') {
+      this.emptyField = true;
+    } else {
+      this.emptyField = false
+      this.search()
+    }
   }
  },
  mounted () {
