@@ -118,7 +118,7 @@ new Vue({
      setTimeout(function(){
        var top = document.getElementById("resultsSection").offsetTop
        window.scrollTo({ top: top+80, behavior: 'smooth' })
-    }, 1000);
+    }, 100);
    }
  },
  mounted () {
