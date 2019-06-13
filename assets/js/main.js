@@ -119,10 +119,13 @@ new Vue({
        var top = document.getElementById("resultsSection").offsetTop
        window.scrollTo({ top: top+80, behavior: 'smooth' })
     }, 100);
-   }
+  },
+  trySearch: function () {
+    this.search()
+  }
  },
  mounted () {
-
+   // Original main.js contented moved here in order for onscroll fade in css feature to work
 	 (function($) {
 
 	 	var	$window = $(window),

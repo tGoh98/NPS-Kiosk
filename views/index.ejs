@@ -44,8 +44,8 @@
             </select>
             </li>
             <li>Search term:
-            <input v-model="q" type="text" placeholder="Enter a keyword e.g. &quot;Yellowstone&quot;">
-            <button v-on:click="search" class="button fit">search</button>
+            <input id="qField" v-model="q" type="text" placeholder="Enter a keyword e.g. &quot;Yellowstone&quot;">
+            <button id="searchButton" v-on:click="trySearch" class="button fit">search</button>
           </ul>
 					</div>
         <div class="image">
@@ -229,10 +229,19 @@
 		<script src="js/breakpoints.min.js"></script>
 		<script src="js/util.js"></script>
 
-
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/main.js"></script>
+
+    <script>
+    var qField = document.getElementById("qField");
+    qField.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+       event.preventDefault();
+       document.getElementById("searchButton").click();
+      }
+    });
+    </script>
 
  	</body>
  </html>
