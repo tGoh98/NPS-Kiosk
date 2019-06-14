@@ -100,19 +100,21 @@ new Vue({
      let q = this.q
 
      // API call
-     const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33';
+     const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
      this.info = await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`).then(response => (this.info = response.data.data)).catch(error => {
         console.log(error)
         this.errored = true
       })
-     console.log(this.info);
-     console.log(this.info.length); //doesn't work for null obj, see if some param that works
+     // console.log(this.info)
+     // console.log(this.info.length) //doesn't work for null obj, see if some param that works
 
      // Filter results by selected designation
      if(designation != "Any") {
        // Filter this.info with array.filter
-
+       this.info = await this.info.filter(park => park.designation.includes(designation))
      }
+
+     console.log(this.info)
 
      // Show results
      this.displayResults = true
