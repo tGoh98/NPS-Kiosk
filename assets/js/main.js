@@ -9,6 +9,7 @@ new Vue({
   data: {
     url: 'images/search_img.jpg',
     displayResults: false,
+    noResults: false,
     displayPark: false,
     emptyField: false,
     q: '',
@@ -113,10 +114,16 @@ new Vue({
        // Filter this.info with array.filter
        this.info = await this.info.filter(park => park.designation.includes(designation))
      }
-
      console.log(this.info)
 
-     // Show results
+     // Handle case where no results are found
+     if (this.info.length == 0) {
+       this.noResults = true
+     } else {
+       // Show results
+       this.noResults = false
+     }
+     // Scroll to results section
      this.displayResults = true
      setTimeout(function(){
        var top = document.getElementById("resultsSection").offsetTop
