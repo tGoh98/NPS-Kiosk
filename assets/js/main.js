@@ -127,7 +127,7 @@ new Vue({
      this.displayResults = true
      setTimeout(function(){
        var top = document.getElementById("resultsSection").offsetTop
-       window.scrollTo({ top: top+80, behavior: 'smooth' })
+       window.scrollTo({ top: top, behavior: 'smooth' })
     }, 100);
   },
   trySearch: function () {
