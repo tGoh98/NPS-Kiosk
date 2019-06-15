@@ -8,12 +8,13 @@ new Vue({
   el: '#wrapper',
   data: {
     url: 'images/search_img.jpg',
-    displayResults: false,
+    displaySquirrel: false,
+    displayGallery: 'hidden',
+    displayResults: 'hidden',
     noResults: false,
-    displayPark: false,
     emptyField: false,
     q: '',
-    info: null,
+    info: Array(50).fill(0),
     selectedState: { value: 'AL', text: "Alabama" },
     states: [
       { value: 'AL', text: 'Alabama' },
@@ -102,29 +103,29 @@ new Vue({
 
      // API call
      const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
-     this.info = await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`).then(response => (this.info = response.data.data)).catch(error => {
+     await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`).then(response => (res = response.data.data)).catch(error => {
         console.log(error)
         this.errored = true
       })
-     // console.log(this.info)
-     // console.log(this.info.length) //doesn't work for null obj, see if some param that works
+      // Filter results by selected designation
+      if(designation != "Any") {
+        // Filter this.info with array.filter
+        res = await res.filter(park => park.designation.includes(designation))
+      }
+      if (res.length > 0) {
+        this.info = res
+        this.displaySquirrel = false
+        this.displayGallery = 'visible'
+      } else {
+        // No results found
+        this.displaySquirrel = true
+        this.displayGallery = 'hidden'
+      }
 
-     // Filter results by selected designation
-     if(designation != "Any") {
-       // Filter this.info with array.filter
-       this.info = await this.info.filter(park => park.designation.includes(designation))
-     }
      console.log(this.info)
 
-     // Handle case where no results are found
-     if (this.info.length == 0) {
-       this.noResults = true
-     } else {
-       // Show results
-       this.noResults = false
-     }
-     // Scroll to results section
-     this.displayResults = true
+     // Scroll to gallery section
+     this.displayResults = 'visible'
      setTimeout(function(){
        var top = document.getElementById("resultsSection").offsetTop
        window.scrollTo({ top: top, behavior: 'smooth' })
@@ -133,7 +134,7 @@ new Vue({
   trySearch: function () {
     // Check if search term input field is empty
     if(this.q == '') {
-      this.emptyField = true;
+      this.emptyField = true
     } else {
       this.emptyField = false
       this.search()
