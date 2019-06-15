@@ -11,7 +11,8 @@ NPS-Kiosk a web application built on Node.js and Express.js that serves as a vir
 ## How to run
 1. Ensure that [node js](https://nodejs.org/en/) is installed on your system
 2. Download and extract the repository
-3. Open git bash and start the local web server with the command `node server.js`
+3. Open git bash, navigate to the repository, and run `npm install` and then `node server.js`
+4. The server should now be running on localhost:8000
 ---
 This was created for [Captial One's Coding Challenge](https://www.mindsumo.com/contests/national-park-api).
 
