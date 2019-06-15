@@ -10,7 +10,7 @@ new Vue({
     url: 'images/search_img.jpg',
     displaySquirrel: false,
     displayGallery: 'hidden',
-    displayResults: 'hidden',
+    displayResults: 'none',
     noResults: false,
     emptyField: false,
     q: '',
@@ -125,7 +125,7 @@ new Vue({
      console.log(this.info)
 
      // Scroll to gallery section
-     this.displayResults = 'visible'
+     this.displayResults = 'inline'
      setTimeout(function(){
        var top = document.getElementById("resultsSection").offsetTop
        window.scrollTo({ top: top, behavior: 'smooth' })
