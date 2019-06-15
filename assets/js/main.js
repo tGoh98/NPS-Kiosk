@@ -116,8 +116,10 @@ new Vue({
         this.info = res
         this.displaySquirrel = false
         this.displayGallery = 'visible'
+        this.displayResults = 'inline'
       } else {
         // No results found
+        this.displayResults = 'none'
         this.displaySquirrel = true
         this.displayGallery = 'hidden'
       }
@@ -125,7 +127,6 @@ new Vue({
      console.log(this.info)
 
      // Scroll to gallery section
-     this.displayResults = 'inline'
      setTimeout(function(){
        var top = document.getElementById("resultsSection").offsetTop
        window.scrollTo({ top: top, behavior: 'smooth' })
