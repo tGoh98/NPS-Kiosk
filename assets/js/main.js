@@ -140,6 +140,11 @@ new Vue({
         this.displayGallery = 'hidden'
       }
 
+      setTimeout(function(){
+        var top = document.getElementById("resultsSection").offsetTop
+        window.scrollTo({ top: top, behavior: 'smooth' })
+     }, 100)
+
      console.log(this.info)
   },
   trySearch: function () {
