@@ -6,10 +6,6 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
 
-// Get API key
-// require('dotenv').config();
-// const apiKey = process.env.API_KEY;
-
 // Get access to folders
 app.use(express.static('assets'));
 app.use(express.static('views'));

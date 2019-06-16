@@ -9,6 +9,7 @@ new Vue({
   data: {
     url: 'images/search_img.jpg',
     displaySquirrel: false,
+    displaySpinner: false,
     displayGallery: 'hidden',
     displayResults: 'none',
     noResults: false,
@@ -96,6 +97,18 @@ new Vue({
   },
   methods: {
    search: async function () {
+     // Reset everything
+     this.displaySquirrel = false
+     this.displayResults = 'none'
+     this.displayGallery = 'hidden'
+
+     // Scroll to gallery section and display spinner
+     this.displaySpinner = true
+     setTimeout(function(){
+       var top = document.getElementById("resultsSection").offsetTop
+       window.scrollTo({ top: top, behavior: 'smooth' })
+    }, 100)
+
      // Get form values
      let stateCode = this.selectedState.value
      let designation = this.selectedDesignation.value
@@ -112,6 +125,9 @@ new Vue({
         // Filter this.info with array.filter
         res = await res.filter(park => park.designation.includes(designation))
       }
+
+      // Hide spinner and display relevant results
+      this.displaySpinner = false;
       if (res.length > 0) {
         this.info = res
         this.displaySquirrel = false
@@ -119,18 +135,12 @@ new Vue({
         this.displayResults = 'inline'
       } else {
         // No results found
-        this.displayResults = 'none'
         this.displaySquirrel = true
+        this.displayResults = 'none'
         this.displayGallery = 'hidden'
       }
 
      console.log(this.info)
-
-     // Scroll to gallery section
-     setTimeout(function(){
-       var top = document.getElementById("resultsSection").offsetTop
-       window.scrollTo({ top: top, behavior: 'smooth' })
-    }, 100);
   },
   trySearch: function () {
     // Check if search term input field is empty

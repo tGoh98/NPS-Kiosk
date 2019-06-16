@@ -7,6 +7,7 @@
  		<meta charset="utf-8" />
  		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
  		<link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
  		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
  	</head>
 
@@ -59,6 +60,16 @@
 
         <!-- Search results -->
         <a id="resultsSection"></a>
+
+        <!-- Spinner -->
+        <section class="wrapper style1 align-center" v-if="displaySpinner">
+          <div class="inner" style="padding-top: 40px;">
+            <h2>Search Results</h2>
+          </div>
+          <div class="spinner-border"></div>
+        </section>
+
+        <!-- No results found -->
         <section class="wrapper style1 align-center" v-if="displaySquirrel">
           <div class="inner" style="padding-bottom: 15px; padding-top: 40px;">
             <h2>Search Results</h2>
@@ -68,7 +79,8 @@
             <img src="images/squirrel.jpg" alt="squirrel">
           </div>
         </section>
-        
+
+        <!-- Results gallery  -->
         <section class="wrapper style1 align-center" :style="{ display: displayResults }">
           <div class="inner" style="padding-bottom: 15px; padding-top: 40px;">
             <h2>Search Results</h2>
