@@ -37,6 +37,10 @@ ol, ul {
 	list-style: none;
 }
 
+#galleryImage:hover {
+    cursor: pointer;
+}
+
 blockquote, q {
 	quotes: none;
 }

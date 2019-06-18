@@ -4,6 +4,114 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+data = [
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  },
+  {
+    "images": [
+      {
+        "url": "https://www.nps.gov/common/uploads/structured_data/3C7AAC04-1DD8-B71B-0B6534785C41D6B5.jpg"
+      }
+    ],
+  }
+]
+
 new Vue({
   el: '#wrapper',
   data: {
@@ -15,7 +123,7 @@ new Vue({
     noResults: false,
     emptyField: false,
     q: '',
-    info: Array(50).fill(0),
+    info: data,
     selectedState: { value: 'AL', text: "Alabama" },
     states: [
       { value: 'AL', text: 'Alabama' },
@@ -116,10 +224,15 @@ new Vue({
 
      // API call
      const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
-     await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&api_key=${apiKey}`).then(response => (res = response.data.data)).catch(error => {
+     await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&fields=images&api_key=${apiKey}`).then(response => (res = response.data.data)).catch(error => {
         console.log(error)
         this.errored = true
       })
+     // await axios.get(`https://developer.nps.gov/api/v1/parks?parkCode=yell&api_key=${apiKey}`).then(response => (res = response.request.response)).catch(error => {
+     //    console.log(error)
+     //    this.errored = true
+     //  })
+
       // Filter results by selected designation
       if(designation != "Any") {
         // Filter this.info with array.filter
@@ -133,6 +246,13 @@ new Vue({
         this.displaySquirrel = false
         this.displayGallery = 'visible'
         this.displayResults = 'inline'
+
+        // Add alt images for parks with no images found
+        this.info.forEach(park => {
+          if (park.images.length == 0) {
+            park.images.push({ url: 'images/squirrel.jpg' })
+          }
+        })
       } else {
         // No results found
         this.displaySquirrel = true
@@ -155,6 +275,9 @@ new Vue({
       this.emptyField = false
       this.search()
     }
+  },
+  test: function (e) {
+    alert(e)
   }
  },
  mounted () {
