@@ -1,4 +1,4 @@
-# What is NPS-Kiosk?
+# What is NPS-Kiosk? 
 NPS-Kiosk a web application built on Node.js and Express.js that serves as a virtual kiosk to assist the user in finding information about the National Parks Service.
 
 ## Features
@@ -6,7 +6,7 @@ NPS-Kiosk a web application built on Node.js and Express.js that serves as a vir
 * Intuitive, easy to navigate interface
 * Option to filter search results by state, designation, and keyword
 * Displays details about a park's visitor center, campgrounds, alerts, articles, events, news releases, and educational information (lesson plans, relevant people, and places)
-* Live deployed website on a custom Heroku domain: [http://nps-api-webapp.herokuapp.com/](http://nps-api-webapp.herokuapp.com/)
+* Live deployed website on a custom Heroku domain: <http://nps-api-webapp.herokuapp.com/>
 
 ## How to run
 1. Ensure that [node js](https://nodejs.org/en/) is installed on your system
