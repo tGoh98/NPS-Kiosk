@@ -1,6 +1,6 @@
 //server.js
 
-// Reuuire packages
+// Require packages
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');

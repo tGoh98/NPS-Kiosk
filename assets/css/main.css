@@ -37,6 +37,27 @@ ol, ul {
 	list-style: none;
 }
 
+/* For selected park columns */
+.column {
+  float: left;
+}
+
+.left {
+  width: 75%;
+}
+
+.right {
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* for gallery images */
 #galleryImage:hover {
     cursor: pointer;
 }

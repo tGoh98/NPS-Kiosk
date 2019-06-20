@@ -12,10 +12,22 @@ new Vue({
     displaySpinner: false,
     displayGallery: 'hidden',
     displayResults: 'none',
+    selectedPark: {
+      "images": [
+        {
+          "url": "images/squirrel.jpg"
+        },
+        {
+          "url": "images/squirrel.jpg"
+        }
+      ],
+    }, // Filler data
+    selectedParkImageUrl: "images/squirrel.jpg",
+    displayPark: false,
     noResults: false,
     emptyField: false,
     q: '',
-    info: data,
+    info: data, // filler data imported from data.js
     selectedState: { value: 'AL', text: "Alabama" },
     states: [
       { value: 'AL', text: 'Alabama' },
@@ -101,6 +113,7 @@ new Vue({
      this.displaySquirrel = false
      this.displayResults = 'none'
      this.displayGallery = 'hidden'
+     this.displayPark = false
 
      // Scroll to gallery section and display spinner
      this.displaySpinner = true
@@ -116,7 +129,7 @@ new Vue({
 
      // API call
      const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
-     await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&fields=images&api_key=${apiKey}`).then(response => (res = response.data.data)).catch(error => {
+     await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&fields=images,contacts&api_key=${apiKey}`).then(response => (res = response.data.data)).catch(error => {
         console.log(error)
         this.errored = true
       })
@@ -168,12 +181,32 @@ new Vue({
       this.search()
     }
   },
+  loadParkInfo: function(parkObj) {
+    // Set image. Have to check in case selectedPark only has one image
+    this.selectedPark = parkObj
+    if (this.selectedPark.images.length == 1) {
+      this.selectedParkImageUrl = this.selectedPark.images[0].url
+    } else {
+      this.selectedParkImageUrl = this.selectedPark.images[1].url
+    }
+
+    // Load section
+    this.displayPark = true
+
+    // Scroll
+    setTimeout(function(){
+      var top = document.getElementById("selectedParkSection").offsetTop
+      window.scrollTo({ top: top, behavior: 'smooth' })
+   }, 100)
+
+
+  },
   test: function (e) {
     alert(e)
   }
  },
  mounted () {
-   // Original main.js contented moved here in order for onscroll fade in css feature to work
+   // Original main.js content moved here in order for onscroll fade in css feature to work
 	 (function($) {
 
 	 	var	$window = $(window),
