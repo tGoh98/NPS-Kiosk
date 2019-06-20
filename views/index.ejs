@@ -101,6 +101,13 @@
 
         <!-- Selected Park -->
         <a id="selectedParkSection"></a>
+
+        <!-- Spinner -->
+        <section class="wrapper style1 align-center" v-if="displaySpinner2">
+          <hr>
+          <div class="spinner-border"></div>
+        </section>
+
         <section class="wrapper style1 align-center" v-if="displayPark">
         <!-- <section class="wrapper style1 align-center"> -->
           <hr>
@@ -113,7 +120,7 @@
 
             <div style="text-align: Left;">
               <div class="row">
-                <div class="column left">
+                <div class="column left" style="padding-left: 20px;">
                   <h4>Description</h4>
                   <p>{{ selectedPark.description }}</p>
                   <!-- <p>Visit Yellowstone and experience the world's first national park. Marvel at a volcano's hidden power rising up in colorful hot springs, mudpots, and geysers. Explore mountains, forests, and lakes to watch wildlife and witness the drama of the natural world unfold. Discover the history that led to the conservation of our national treasures 'for the benefit and enjoyment of the people.'</p> -->
@@ -130,6 +137,24 @@
                     </p>
                   </div>
                 </div>
+              </div>
+
+              <div style="text-align: Left;">
+                <h4>Alerts</h4>
+                <p v-if="alerts.length == 0">None!</p>
+
+                <div class="row">
+                  <div class="column left2">
+                    <div v-for="alert in alerts">
+                      <img :src="alert.icon" alt="alert icon"><br /><br />
+                    </div>
+                  </div>
+                    <div class="column right2">
+                      <div v-for="alert in alerts">
+                        {{ alert.description }} <br /><br />
+                      </div>
+                    </div>
+                  </div>
               </div>
 
 					</div>

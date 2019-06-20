@@ -37,7 +37,7 @@ ol, ul {
 	list-style: none;
 }
 
-/* For selected park columns */
+/* For columns */
 .column {
   float: left;
 }
@@ -48,6 +48,14 @@ ol, ul {
 
 .right {
   width: 25%;
+}
+
+.left2 {
+  width: 5%;
+}
+
+.right2 {
+  width: 95%;
 }
 
 /* Clear floats after the columns */

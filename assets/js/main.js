@@ -23,7 +23,9 @@ new Vue({
       ],
     }, // Filler data
     selectedParkImageUrl: "images/squirrel.jpg",
-    displayPark: false,
+    displayPark: false, // also controls displaying lesson plans, etc
+    displaySpinner2: false,
+    alerts: [],
     noResults: false,
     emptyField: false,
     q: '',
@@ -131,12 +133,7 @@ new Vue({
      const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
      await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&fields=images,contacts&api_key=${apiKey}`).then(response => (res = response.data.data)).catch(error => {
         console.log(error)
-        this.errored = true
       })
-     // await axios.get(`https://developer.nps.gov/api/v1/parks?parkCode=yell&api_key=${apiKey}`).then(response => (res = response.request.response)).catch(error => {
-     //    console.log(error)
-     //    this.errored = true
-     //  })
 
       // Filter results by selected designation
       if(designation != "Any") {
@@ -170,6 +167,7 @@ new Vue({
         window.scrollTo({ top: top, behavior: 'smooth' })
      }, 100)
 
+     console.log("this.info")
      console.log(this.info)
   },
   trySearch: function () {
@@ -181,7 +179,14 @@ new Vue({
       this.search()
     }
   },
-  loadParkInfo: function(parkObj) {
+  loadParkInfo: async function(parkObj) {
+    // Display spinner and scroll
+    this.displaySpinner2 = true
+    setTimeout(function(){
+      var top = document.getElementById("selectedParkSection").offsetTop
+      window.scrollTo({ top: top, behavior: 'smooth' })
+     }, 100)
+
     // Set image. Have to check in case selectedPark only has one image
     this.selectedPark = parkObj
     if (this.selectedPark.images.length == 1) {
@@ -190,16 +195,31 @@ new Vue({
       this.selectedParkImageUrl = this.selectedPark.images[1].url
     }
 
+    // Get alerts
+    const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
+    await axios.get(`https://developer.nps.gov/api/v1/alerts?stateCode=${parkObj.parkCode}&api_key=${apiKey}`).then(response => (this.alerts = response.data.data)).catch(error => {
+       console.log(error)
+     })
+
+     // Add corresponding icon to each alert in alerts
+     this.alerts.forEach(alert => {
+       if (alert.category == "Danger") {
+         alert.icon = "images/dangerIcon.png"
+       } else if (alert.category == "Caution") {
+         alert.icon = "images/cautionIcon.png"
+       } else if (alert.category == "Information") {
+         alert.icon = "images/infoIcon.png"
+       } else { // Park Closure
+         alert.icon = "images/closureIcon.png"
+       }
+     })
+
+     console.log("this.alerts:")
+     console.log(this.alerts)
+
     // Load section
+    this.displaySpinner2 = false
     this.displayPark = true
-
-    // Scroll
-    setTimeout(function(){
-      var top = document.getElementById("selectedParkSection").offsetTop
-      window.scrollTo({ top: top, behavior: 'smooth' })
-   }, 100)
-
-
   },
   test: function (e) {
     alert(e)
