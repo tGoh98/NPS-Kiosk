@@ -6,6 +6,52 @@
 
 const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
 
+// Computing distance
+// Formula taken from GeoDataSource.com
+function distance(lat1, lon1, lat2, lon2, unit) {
+  // console.log(lat1, lon1, lat2, lon2)
+	if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		if (unit=="K") { dist = dist * 1.609344 }
+		if (unit=="N") { dist = dist * 0.8684 }
+		return dist.toPrecision(3);
+	}
+}
+
+// Helper function to convert NPS's latLong format for parks
+// Ex: "lat:44.59824417, long:-110.5471695"
+function convertLatLongPark(latLong) {
+  let arr = latLong.split(",")
+  var ret = []
+  ret.push(arr[0].substring(4))
+  ret.push(arr[1].substring(6))
+  return ret
+}
+
+// Helper function to convert NPS's latLong format for campgrounds and visitor centers
+// Ex: "{lat:44.9736095, lng:-110.6932316}"
+function convertLatLong(latLong) {
+  let arr = latLong.split(",")
+  var ret = []
+  // console.log(arr[0], arr[1]);
+  ret.push(arr[0].substring(5))
+  ret.push(arr[1].substring(5))
+  return ret
+}
+
 new Vue({
   el: '#wrapper',
   data: {
@@ -118,6 +164,8 @@ new Vue({
      this.displayResults = 'none'
      this.displayGallery = 'hidden'
      this.displayPark = 'none'
+     this.loadedCampgrounds = false
+     this.loadedVisitorCenters = false
 
      // Scroll to gallery section and display spinner
      this.displaySpinner = true
@@ -232,13 +280,24 @@ new Vue({
          console.log(error)
        })
 
+       // Compute distance from the park to each campground
+       let parkLL = convertLatLongPark(this.selectedPark.latLong)
+       this.campgrounds.forEach(camp => {
+         if (camp.latLong != "") {
+           let campLL = convertLatLong(camp.latLong)
+           camp.distance = distance(parkLL[0], parkLL[1], campLL[0], parseFloat(campLL[1]), 'M') + " mi" // Use parseFloat to catch improper substr }
+         } else {
+           camp.distance = "Latitude and longitude coordinates not provided by NPS"
+         }
+       })
+
        // Hide spinner and show results
        this.displaySpinnerCamp = false
        this.loadedCampgrounds = true
        this.displayCampgrounds = true
 
-       // console.log("this.campgrounds:")
-       // console.log(this.campgrounds)
+       console.log("this.campgrounds:")
+       console.log(this.campgrounds)
     }
   },
   getVisitorCenters: async function() {
@@ -250,6 +309,18 @@ new Vue({
       // Get nearby campgrounds
       await axios.get(`https://developer.nps.gov/api/v1/visitorcenters?parkCode=${this.selectedPark.parkCode}&api_key=${apiKey}`).then(response => (this.visitorCenters = response.data.data)).catch(error => {
          console.log(error)
+       })
+
+       // Compute distance from the park to each visitorCenter
+       let parkLL = convertLatLongPark(this.selectedPark.latLong)
+       this.visitorCenters.forEach(vc => {
+         if (vc.latLong != "") {
+           let vcLL = convertLatLong(vc.latLong)
+           vc.distance = distance(parkLL[0], parkLL[1], vcLL[0], parseFloat(vcLL[1]), 'M') + " mi"
+         } else {
+           vc.distance = "Latitude and longitude coordinates not provided by NPS"
+         }
+
        })
 
        // Hide spinner and show results

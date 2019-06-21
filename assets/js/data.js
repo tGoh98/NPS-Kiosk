@@ -114,8 +114,18 @@ let selectedPark = {
   "weatherInfo": "Yellowstone's weather can vary quite a bit, even in a single day. In the summer, daytime highs can exceed 70F (25C), only to drop 20 or more degrees when a thunderstorm rolls through. It can snow during any month of the year, and winter lows frequently drop below zero, especially at night. Bring a range of clothing options, including a warm jacket and rain gear, even in the summer."
 }
 
-// 50 entries
+// 51 entries
 let data = [
+  {
+    "images": [
+      {
+        "url": "images/squirrel.jpg"
+      },
+      {
+        "url": "images/squirrel.jpg"
+      }
+    ]
+  },
   {
     "images": [
       {

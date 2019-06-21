@@ -177,9 +177,9 @@
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerCamp"></div>
                   <div v-if="displayCampgrounds" v-for="camp in campgrounds">
-                    <strong>{{ camp.name }}</strong><br />
-                    Description: <em>{{ camp.description }}</em><br /><br />
-                    <!-- <p>Distance: {{ camp.distance }} mi</p> -->
+                    <h5>{{ camp.name }}</h5>
+                    <strong>Description:</strong> {{ camp.description }}<br />
+                    <strong>Distance from park:</strong> {{ camp.distance }}<br /><br />
                   </div>
                   <p v-if="campgrounds.length==0 && displaySpinnerCamp == false">No campgrounds to show!</p>
                 </div>
@@ -189,9 +189,9 @@
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerVisit"></div>
                   <div v-if="displayVisitorCenters" v-for="vc in visitorCenters">
-                    <strong>{{ vc.name }}</strong><br />
-                    Description: <em>{{ vc.description }}</em><br />
-                    <!-- <p>Distance: {{ vc.distance }} mi</p> -->
+                    <h5>{{ vc.name }}</h5>
+                    <strong>Description:</strong> {{ vc.description }}<br />
+                    <strong>Distance from park:</strong> {{ vc.distance }}<br />
                     Learn more about <a :href="vc.url" target="_blank">{{ vc.name }}</a>.<br /><br />
                   </div>
                   <p v-if="visitorCenters.length==0 && displaySpinnerVisit == false">No visitor centers to show!</p>
