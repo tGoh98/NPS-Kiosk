@@ -163,13 +163,13 @@
                 <h4>Plan Your Visit</h4>
 
                 <!-- Info -->
-                <div class="accordion" v-on:click="test('hi')">Basic Information</div>
+                <div class="accordion" v-on:click=""><img src="images/infoIcon.svg" alt=""> Basic Information</div>
                 <div class="panel">
                   <p>asdfasdf</p>
                 </div>
 
                 <!-- Campgrounds  -->
-                <div class="accordion" v-on:click="getCampgrounds">Nearby Campgrounds</div>
+                <div class="accordion" v-on:click="getCampgrounds"><img src="images/campgroundIcon.svg" alt=""> Nearby Campgrounds</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerCamp"></div>
                   <div v-if="displayCampgrounds" v-for="camp in campgrounds">
@@ -181,7 +181,7 @@
                 </div>
 
                 <!-- Visitor centers -->
-                <div class="accordion" v-on:click="test('hi')">Visitor Centers</div>
+                <div class="accordion" v-on:click=""><img src="images/visitorCenterIcon.svg" alt=""> Visitor Centers</div>
                 <div class="panel">
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>
