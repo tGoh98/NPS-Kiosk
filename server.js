@@ -2,15 +2,12 @@
 
 // Require packages
 const express = require('express');
-const bodyParser = require('body-parser');
-const request = require('request');
 const app = express();
 
 // Get access to folders
 app.use(express.static('assets'));
 app.use(express.static('views'));
-// Access bodyParser
-app.use(bodyParser.urlencoded({ extended: true }));
+
 // Set index.ejs
 app.set('view engine', 'ejs');
 

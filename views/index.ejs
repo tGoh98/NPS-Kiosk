@@ -108,8 +108,8 @@
           <div class="spinner-border"></div>
         </section>
 
-        <section class="wrapper style1 align-center" v-if="displayPark">
-        <!-- <section class="wrapper style1 align-center"> -->
+        <!-- <section class="wrapper style1 align-center" v-if="displayPark"> -->
+        <section class="wrapper style1 align-center">
           <hr>
 					<div class="content" style="margin: 0 10%;">
 						<h3>{{ selectedPark.fullName }}</h3>
@@ -118,9 +118,10 @@
   						<img :src="selectedParkImageUrl" alt="park image" style="max-height:500px; max-width:1000px;"/>
   					</div>
 
+            <!-- Description section -->
             <div style="text-align: Left;">
               <div class="row">
-                <div class="column left" style="padding-left: 20px;">
+                <div class="column left" style="padding-left: 15px;">
                   <h4>Description</h4>
                   <p>{{ selectedPark.description }}</p>
                   <!-- <p>Visit Yellowstone and experience the world's first national park. Marvel at a volcano's hidden power rising up in colorful hot springs, mudpots, and geysers. Explore mountains, forests, and lakes to watch wildlife and witness the drama of the natural world unfold. Discover the history that led to the conservation of our national treasures 'for the benefit and enjoyment of the people.'</p> -->
@@ -128,21 +129,21 @@
                   <div class="column right">
                     <h5>Contact us:</h5>
                     <p>
-                      <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
+                      <!-- <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
                       <span style="font-weight:500;">Email:</span> <a :href=`mailto:${selectedPark.contacts.emailAddresses[0].emailAddress}`>{{ selectedPark.contacts.emailAddresses[0].emailAddress }}</a><br />
-                      <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br />
-                      <!-- <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
+                      <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br /> -->
+                      <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
                       <span style="font-weight:500;">Email:</span> example@gmail.com<br />
-                      <span style="font-weight:500;">Website:</span> www.google.com<br /> -->
+                      <span style="font-weight:500;">Website:</span> www.google.com<br />
                     </p>
                   </div>
                 </div>
               </div>
 
+              <!-- Alerts section -->
               <div style="text-align: Left;">
                 <h4>Alerts</h4>
                 <p v-if="alerts.length == 0">None!</p>
-
                 <div class="row">
                   <div class="column left2">
                     <div v-for="alert in alerts">
@@ -155,6 +156,36 @@
                       </div>
                     </div>
                   </div>
+              </div>
+
+              <!-- Plan Your Visit section -->
+              <div style="text-align: Left;">
+                <h4>Plan Your Visit</h4>
+
+                <!-- Info -->
+                <div class="accordion" v-on:click="test('hi')">Basic Information</div>
+                <div class="panel">
+                  <p>asdfasdf</p>
+                </div>
+
+                <!-- Campgrounds  -->
+                <div class="accordion" v-on:click="getCampgrounds">Nearby Campgrounds</div>
+                <div class="panel">
+                  <div class="spinner-border" v-if="displaySpinnerCamp"></div>
+                  <div v-if="displayCampgrounds" v-for="camp in campgrounds">
+                    <strong>{{ camp.name }}</strong><br />
+                    Description: <em>{{ camp.description }}</em><br /><br />
+                    <!-- <p>Distance: {{ camp.distance }} mi</p> -->
+                  </div>
+                  <p v-if="campgrounds.length==0 && displaySpinnerCamp == false">No campgrounds to show!</p>
+                </div>
+
+                <!-- Visitor centers -->
+                <div class="accordion" v-on:click="test('hi')">Visitor Centers</div>
+                <div class="panel">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+
               </div>
 
 					</div>
@@ -192,6 +223,22 @@
        document.getElementById("searchButton").click();
       }
     });
+
+    // Accordion code
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight){
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
     </script>
 
  	</body>

@@ -4,6 +4,8 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
+
 new Vue({
   el: '#wrapper',
   data: {
@@ -26,6 +28,10 @@ new Vue({
     displayPark: false, // also controls displaying lesson plans, etc
     displaySpinner2: false,
     alerts: [],
+    campgrounds: [],
+    displayCampgrounds: false,
+    loadedCampgrounds: false,
+    displaySpinnerCamp: false,
     noResults: false,
     emptyField: false,
     q: '',
@@ -130,7 +136,6 @@ new Vue({
      let q = this.q
 
      // API call
-     const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
      await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=${stateCode}&q=${q}&fields=images,contacts&api_key=${apiKey}`).then(response => (res = response.data.data)).catch(error => {
         console.log(error)
       })
@@ -196,8 +201,7 @@ new Vue({
     }
 
     // Get alerts
-    const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
-    await axios.get(`https://developer.nps.gov/api/v1/alerts?stateCode=${parkObj.parkCode}&api_key=${apiKey}`).then(response => (this.alerts = response.data.data)).catch(error => {
+    await axios.get(`https://developer.nps.gov/api/v1/alerts?parkCode=${parkObj.parkCode}&api_key=${apiKey}`).then(response => (this.alerts = response.data.data)).catch(error => {
        console.log(error)
      })
 
@@ -220,6 +224,26 @@ new Vue({
     // Load section
     this.displaySpinner2 = false
     this.displayPark = true
+  },
+  getCampgrounds: async function() {
+    // Check if already populated
+    if (!this.loadedCampgrounds) {
+      // Display spinner
+      this.displaySpinnerCamp = true
+
+      // Get nearby campgrounds
+      await axios.get(`https://developer.nps.gov/api/v1/campgrounds?parkCode=${this.selectedPark.parkCode}&api_key=${apiKey}`).then(response => (this.campgrounds = response.data.data)).catch(error => {
+         console.log(error)
+       })
+
+       // Hide spinner and show results
+       this.displaySpinnerCamp = false
+       this.loadedCampgrounds = true
+       this.displayCampgrounds = true
+
+       console.log(this.campgrounds)
+    }
+
   },
   test: function (e) {
     alert(e)
