@@ -32,6 +32,10 @@ new Vue({
     displayCampgrounds: false,
     loadedCampgrounds: false,
     displaySpinnerCamp: false,
+    visitorCenters: [],
+    displayVisitorCenters: false,
+    loadedVisitorCenters: false,
+    displaySpinnerVisit: false,
     noResults: false,
     emptyField: false,
     q: '',
@@ -218,8 +222,8 @@ new Vue({
        }
      })
 
-     console.log("this.alerts:")
-     console.log(this.alerts)
+     // console.log("this.alerts:")
+     // console.log(this.alerts)
 
     // Load section
     this.displaySpinner2 = false
@@ -241,9 +245,29 @@ new Vue({
        this.loadedCampgrounds = true
        this.displayCampgrounds = true
 
-       console.log(this.campgrounds)
+       // console.log("this.campgrounds:")
+       // console.log(this.campgrounds)
     }
+  },
+  getVisitorCenters: async function() {
+    // Check if already populated
+    if (!this.loadedVisitorCenters) {
+      // Display spinner
+      this.displaySpinnerVisit = true
 
+      // Get nearby campgrounds
+      await axios.get(`https://developer.nps.gov/api/v1/visitorcenters?parkCode=${this.selectedPark.parkCode}&api_key=${apiKey}`).then(response => (this.visitorCenters = response.data.data)).catch(error => {
+         console.log(error)
+       })
+
+       // Hide spinner and show results
+       this.displaySpinnerVisit = false
+       this.loadedVisitorCenters = true
+       this.displayVisitorCenters = true
+
+       console.log("this.visitorCenters:")
+       console.log(this.visitorCenters)
+    }
   },
   test: function (e) {
     alert(e)
