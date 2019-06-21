@@ -14,20 +14,12 @@ new Vue({
     displaySpinner: false,
     displayGallery: 'hidden',
     displayResults: 'none',
-    selectedPark: {
-      "images": [
-        {
-          "url": "images/squirrel.jpg"
-        },
-        {
-          "url": "images/squirrel.jpg"
-        }
-      ],
-    }, // Filler data
+    selectedPark: selectedPark, // Filler data imported from data.js
     selectedParkImageUrl: "images/squirrel.jpg",
-    displayPark: false, // also controls displaying lesson plans, etc
+    displayPark: 'none',
     displaySpinner2: false,
     alerts: [],
+    showInfo: false,
     campgrounds: [],
     displayCampgrounds: false,
     loadedCampgrounds: false,
@@ -125,7 +117,7 @@ new Vue({
      this.displaySquirrel = false
      this.displayResults = 'none'
      this.displayGallery = 'hidden'
-     this.displayPark = false
+     this.displayPark = 'none'
 
      // Scroll to gallery section and display spinner
      this.displaySpinner = true
@@ -227,7 +219,7 @@ new Vue({
 
     // Load section
     this.displaySpinner2 = false
-    this.displayPark = true
+    this.displayPark = 'inline'
   },
   getCampgrounds: async function() {
     // Check if already populated
@@ -265,8 +257,8 @@ new Vue({
        this.loadedVisitorCenters = true
        this.displayVisitorCenters = true
 
-       console.log("this.visitorCenters:")
-       console.log(this.visitorCenters)
+       // console.log("this.visitorCenters:")
+       // console.log(this.visitorCenters)
     }
   },
   test: function (e) {

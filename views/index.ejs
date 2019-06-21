@@ -108,8 +108,8 @@
           <div class="spinner-border"></div>
         </section>
 
-        <!-- <section class="wrapper style1 align-center" v-if="displayPark"> -->
-        <section class="wrapper style1 align-center">
+        <section class="wrapper style1 align-center" :style="{ display: displayPark }">
+        <!-- <section class="wrapper style1 align-center"> -->
           <hr>
 					<div class="content" style="margin: 0 10%;">
 						<h3>{{ selectedPark.fullName }}</h3>
@@ -129,12 +129,12 @@
                   <div class="column right">
                     <h5>Contact us:</h5>
                     <p>
-                      <!-- <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
+                      <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
                       <span style="font-weight:500;">Email:</span> <a :href=`mailto:${selectedPark.contacts.emailAddresses[0].emailAddress}`>{{ selectedPark.contacts.emailAddresses[0].emailAddress }}</a><br />
-                      <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br /> -->
-                      <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
+                      <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br />
+                      <!-- <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
                       <span style="font-weight:500;">Email:</span> example@gmail.com<br />
-                      <span style="font-weight:500;">Website:</span> www.google.com<br />
+                      <span style="font-weight:500;">Website:</span> www.google.com<br /> -->
                     </p>
                   </div>
                 </div>
@@ -146,7 +146,7 @@
                 <p v-if="alerts.length == 0">None!</p>
                 <div class="row">
                   <div class="column left2">
-                    <div v-for="alert in alerts">
+                    <div v-for="alert in alerts" style="padding-top: 5px; padding-bottom: 5px;">
                       <img :src="alert.icon" alt="alert icon"><br /><br />
                     </div>
                   </div>
@@ -163,9 +163,13 @@
                 <h4>Plan Your Visit</h4>
 
                 <!-- Info -->
-                <div class="accordion" v-on:click=""><img src="images/infoIcon.svg" alt=""> Basic Information</div>
-                <div class="panel">
-                  <p>asdfasdf</p>
+                <div class="accordion" v-on:click="showInfo = true"><img src="images/infoIcon.svg" alt=""> Basic Information</div>
+                <div class="panel" v-if="showInfo">
+                  <strong>{{ selectedPark.fullName }}</strong><br /><br />
+                  State(s): <em>{{ selectedPark.states.replace(new RegExp(",", 'g'), ", ") }}</em><br /><br />
+                  Designation: <em>{{ selectedPark.designation }}</em><br /><br />
+                  Directions: <em>{{ selectedPark.directionsInfo }}</em><br /><br />
+                  Weather: <em>{{ selectedPark.weatherInfo }}</em><br /><br />
                 </div>
 
                 <!-- Campgrounds  -->
