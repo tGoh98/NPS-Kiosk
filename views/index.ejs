@@ -173,7 +173,7 @@
                 </div>
 
                 <!-- Campgrounds  -->
-                <div class="accordion" v-on:click="getCampgrounds"><img src="images/campgroundIcon.svg" alt=""> Nearby Campgrounds</div>
+                <div class="accordion" v-on:click="getCampgrounds" id="accCamp"><img src="images/campgroundIcon.svg" alt=""> Nearby Campgrounds</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerCamp"></div>
                   <div v-if="displayCampgrounds" v-for="camp in campgrounds">
@@ -185,7 +185,7 @@
                 </div>
 
                 <!-- Visitor centers -->
-                <div class="accordion" v-on:click="getVisitorCenters"><img src="images/visitorCenterIcon.svg" alt=""> Visitor Centers</div>
+                <div class="accordion" v-on:click="getVisitorCenters" id="accVC"><img src="images/visitorCenterIcon.svg" alt=""> Visitor Centers</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerVisit"></div>
                   <div v-if="displayVisitorCenters" v-for="vc in visitorCenters">
