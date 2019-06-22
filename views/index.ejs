@@ -222,16 +222,17 @@
                 </div>
 
                 <!-- Events  -->
-                <!-- <div class="accordion" v-on:click="getEvents" id="accCamp"><img src="images/campgroundIcon.svg" alt=""> Events</div>
+                <div class="accordion" v-on:click="getEvents" id="accEvent"><img src="images/campgroundIcon.svg" alt=""> Events</div>
                 <div class="panel">
-                  <div class="spinner-border" v-if="displaySpinnerCamp"></div>
-                  <div v-if="displayCampgrounds" v-for="camp in campgrounds">
-                    <h5>{{ camp.name }}</h5>
-                    <strong>Description:</strong> {{ camp.description }}<br />
-                    <strong>Distance from park:</strong> {{ camp.distance }}<br /><br />
+                  <div class="spinner-border" v-if="displaySpinnerEvent"></div>
+                  <div v-if="displayEvents" v-for="event in events">
+                    <strong>Location:</strong> {{ event.location }}<br />
+                    <strong>Description:</strong> {{ event.description }}<br />
+                    <strong>Cost:</strong> {{ event.feeinfo }}<br />
+                    <em>Contact {{ event.contacttelephonenumber }} for more information.</em><br /><br />
                   </div>
-                  <p v-if="campgrounds.length==0 && displaySpinnerCamp == false">No campgrounds to show!</p>
-                </div> -->
+                  <p v-if="events.length==0 && displaySpinnerEvent == false">No events to show!</p>
+                </div>
 
                 <!-- News Releases -->
                 <!-- <div class="accordion" v-on:click="getNews" id="accVC"><img src="images/visitorCenterIcon.svg" alt=""> News Releases</div>

@@ -64,6 +64,10 @@ new Vue({
     displayArticles: false,
     loadedArticles: false,
     displaySpinnerArticle: false,
+    events: [],
+    displayEvents: false,
+    loadedEvents: false,
+    displaySpinnerEvent: false,
     noResults: false,
     emptyField: false,
     q: '',
@@ -367,8 +371,43 @@ new Vue({
          document.getElementById("accArt").click()
         }, 100)
 
-       // console.log("this.visitorCenters:")
-       // console.log(this.visitorCenters)
+       // console.log("this.articles:")
+       // console.log(this.articles)
+    }
+  },
+  // Displays events when respective accordion is triggered
+  getEvents: async function() {
+    // Check if already populated
+    if (!this.loadedEvents) {
+      // Display spinner
+      this.displaySpinnerEvent = true
+
+      // Get articles
+      await axios.get(`https://developer.nps.gov/api/v1/events?parkCode=${this.selectedPark.parkCode}&limit=9&api_key=${apiKey}`).then(response => (this.events = response.data.data)).catch(error => {
+         console.log(error)
+       })
+
+       // Populate feeinfo if needed and strip html tags from desc
+       this.events.forEach(event => {
+         if (event.feeinfo == "") {
+           event.feeinfo = "No data provided"
+         }
+         event.description = event.description.replace(new RegExp("<[/a-zA-Z0-9]+>", 'g'), "")
+       })
+
+       // Hide spinner and show results
+       this.displaySpinnerEvent = false
+       this.loadedEvents = true
+       this.displayEvents = true
+
+       // Need to reopen accordion
+       document.getElementById("accEvent").click()
+       setTimeout(function(){
+         document.getElementById("accEvent").click()
+        }, 100)
+
+       // console.log("this.events:")
+       // console.log(this.events)
     }
   },
   test: function (e) {
