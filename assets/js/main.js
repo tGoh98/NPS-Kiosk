@@ -1,9 +1,3 @@
-/*
-	Story by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-
 const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
 
 // Compute distance between two sets of lat long coordinates
@@ -22,7 +16,6 @@ function distance(lat1, lon1, lat2, lon2) {
 function rad(deg) {
   return deg * (Math.PI/180)
 }
-
 
 // Helper function to convert NPS's latLong format for parks
 // Ex: "lat:44.59824417, long:-110.5471695"
@@ -67,6 +60,10 @@ new Vue({
     displayVisitorCenters: false,
     loadedVisitorCenters: false,
     displaySpinnerVisit: false,
+    articles: [],
+    displayArticles: false,
+    loadedArticles: false,
+    displaySpinnerArticle: false,
     noResults: false,
     emptyField: false,
     q: '',
@@ -151,6 +148,7 @@ new Vue({
     ]
   },
   methods: {
+   // Searches for all parks that meet the search criteria
    search: async function () {
      // Reset everything
      this.displaySquirrel = false
@@ -212,6 +210,7 @@ new Vue({
      // console.log("this.info")
      // console.log(this.info)
   },
+  // Checks search q field for valid input
   trySearch: function () {
     // Check if search term input field is empty
     if(this.q == '') {
@@ -221,6 +220,7 @@ new Vue({
       this.search()
     }
   },
+  // Displays the selected park
   loadParkInfo: async function(parkObj) {
     // Display spinner and scroll
     this.displaySpinner2 = true
@@ -262,6 +262,7 @@ new Vue({
     // console.log("this.alerts:")
     // console.log(this.alerts)
   },
+  // Displays the campgrounds when respective accordion is triggered
   getCampgrounds: async function() {
     // Check if already populated
     if (!this.loadedCampgrounds) {
@@ -298,6 +299,7 @@ new Vue({
        // console.log(this.campgrounds)
     }
   },
+  // Displays visitor centers when respective accordion is triggered
   getVisitorCenters: async function() {
     // Check if already populated
     if (!this.loadedVisitorCenters) {
@@ -329,6 +331,40 @@ new Vue({
        document.getElementById("accVC").click()
        setTimeout(function(){
          document.getElementById("accVC").click()
+        }, 100)
+
+       // console.log("this.visitorCenters:")
+       // console.log(this.visitorCenters)
+    }
+  },
+  // Displays articles when respective accordion is triggered
+  getArticles: async function() {
+    // Check if already populated
+    if (!this.loadedArticles) {
+      // Display spinner
+      this.displaySpinnerArticle = true
+
+      // Get articles
+      await axios.get(`https://developer.nps.gov/api/v1/articles?parkCode=${this.selectedPark.parkCode}&limit=9&api_key=${apiKey}`).then(response => (this.articles = response.data.data)).catch(error => {
+         console.log(error)
+       })
+
+       // Add filler image to articles without image
+       this.articles.forEach(article => {
+         if (article.listingimage.url == "") {
+           article.listingimage.url = 'images/squirrel.jpg'
+         }
+       })
+
+       // Hide spinner and show results
+       this.displaySpinnerArticle = false
+       this.loadedArticles = true
+       this.displayArticles = true
+
+       // Need to reopen accordion
+       document.getElementById("accArt").click()
+       setTimeout(function(){
+         document.getElementById("accArt").click()
         }, 100)
 
        // console.log("this.visitorCenters:")

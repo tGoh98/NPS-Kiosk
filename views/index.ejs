@@ -108,8 +108,8 @@
           <div class="spinner-border"></div>
         </section>
 
-        <section class="wrapper style1 align-center" :style="{ display: displayPark }">
-        <!-- <section class="wrapper style1 align-center"> -->
+        <!-- <section class="wrapper style1 align-center" :style="{ display: displayPark }"> -->
+        <section class="wrapper style1 align-center">
           <hr>
 					<div class="content" style="margin: 0 10%;">
 						<h3>{{ selectedPark.fullName }}</h3>
@@ -127,14 +127,14 @@
                   <!-- <p>Visit Yellowstone and experience the world's first national park. Marvel at a volcano's hidden power rising up in colorful hot springs, mudpots, and geysers. Explore mountains, forests, and lakes to watch wildlife and witness the drama of the natural world unfold. Discover the history that led to the conservation of our national treasures 'for the benefit and enjoyment of the people.'</p> -->
                   </div>
                   <div class="column right">
-                    <h5>Contact us:</h5>
+                    <h4>Contact us:</h4>
                     <p>
-                      <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
+                      <!-- <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
                       <span style="font-weight:500;">Email:</span> <a :href=`mailto:${selectedPark.contacts.emailAddresses[0].emailAddress}`>{{ selectedPark.contacts.emailAddresses[0].emailAddress }}</a><br />
-                      <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br />
-                      <!-- <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
+                      <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br /> -->
+                      <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
                       <span style="font-weight:500;">Email:</span> example@gmail.com<br />
-                      <span style="font-weight:500;">Website:</span> www.google.com<br /> -->
+                      <span style="font-weight:500;">Website:</span> www.google.com<br />
                     </p>
                   </div>
                 </div>
@@ -144,6 +144,11 @@
               <div style="text-align: Left;">
                 <h4>Alerts</h4>
                 <p v-if="alerts.length == 0">None!</p>
+                <!-- Doesn't work
+                <ul>
+                  <div v-for="alert in alerts"><li :style="{ 'list-style-image': alert.icon }">{{ alert.description }}</li></div>
+                </ul> -->
+
                 <div class="row">
                   <div class="column left2">
                     <div v-for="alert in alerts" style="padding-top: 5px; padding-bottom: 5px;">
@@ -196,6 +201,50 @@
                   </div>
                   <p v-if="visitorCenters.length==0 && displaySpinnerVisit == false">No visitor centers to show!</p>
                 </div>
+              </div>
+
+              <!-- What's going on section -->
+              <div style="text-align: Left;">
+                <br />
+                <h4>What's Going on at {{ selectedPark.fullName }}?</h4>
+
+                <!-- Articles -->
+                <div class="accordion" v-on:click="getArticles" id="accArt"><img src="images/infoIcon.svg" alt=""> Articles</div>
+                <div class="panel">
+                  <div class="spinner-border" v-if="displaySpinnerArticle"></div>
+                  <div v-if="displayArticles" v-for="article in articles">
+                    <img :src="article.listingimage.url" alt="article image" style="max-width: 750px; max-height: 500px;">
+                    <h5>{{ article.title }}</h5>
+                    {{ article.listingdescription }}<br />
+                    <a :href="article.url" target="_blank">Learn more!</a><br /><br />
+                  </div>
+                  <p v-if="articles.length==0 && displaySpinnerArticle == false">No articles to show!</p>
+                </div>
+
+                <!-- Events  -->
+                <!-- <div class="accordion" v-on:click="getEvents" id="accCamp"><img src="images/campgroundIcon.svg" alt=""> Events</div>
+                <div class="panel">
+                  <div class="spinner-border" v-if="displaySpinnerCamp"></div>
+                  <div v-if="displayCampgrounds" v-for="camp in campgrounds">
+                    <h5>{{ camp.name }}</h5>
+                    <strong>Description:</strong> {{ camp.description }}<br />
+                    <strong>Distance from park:</strong> {{ camp.distance }}<br /><br />
+                  </div>
+                  <p v-if="campgrounds.length==0 && displaySpinnerCamp == false">No campgrounds to show!</p>
+                </div> -->
+
+                <!-- News Releases -->
+                <!-- <div class="accordion" v-on:click="getNews" id="accVC"><img src="images/visitorCenterIcon.svg" alt=""> News Releases</div>
+                <div class="panel">
+                  <div class="spinner-border" v-if="displaySpinnerVisit"></div>
+                  <div v-if="displayVisitorCenters" v-for="vc in visitorCenters">
+                    <h5>{{ vc.name }}</h5>
+                    <strong>Description:</strong> {{ vc.description }}<br />
+                    <strong>Distance from park:</strong> {{ vc.distance }}<br />
+                    Learn more about <a :href="vc.url" target="_blank">{{ vc.name }}</a>.<br /><br />
+                  </div>
+                  <p v-if="visitorCenters.length==0 && displaySpinnerVisit == false">No visitor centers to show!</p>
+                </div> -->
 
               </div>
 
