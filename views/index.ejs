@@ -235,17 +235,17 @@
                 </div>
 
                 <!-- News Releases -->
-                <!-- <div class="accordion" v-on:click="getNews" id="accVC"><img src="images/visitorCenterIcon.svg" alt=""> News Releases</div>
+                <div class="accordion" v-on:click="getNews" id="accNews"><img src="images/visitorCenterIcon.svg" alt=""> News Releases</div>
                 <div class="panel">
-                  <div class="spinner-border" v-if="displaySpinnerVisit"></div>
-                  <div v-if="displayVisitorCenters" v-for="vc in visitorCenters">
-                    <h5>{{ vc.name }}</h5>
-                    <strong>Description:</strong> {{ vc.description }}<br />
-                    <strong>Distance from park:</strong> {{ vc.distance }}<br />
-                    Learn more about <a :href="vc.url" target="_blank">{{ vc.name }}</a>.<br /><br />
+                  <div class="spinner-border" v-if="displaySpinnerNews"></div>
+                  <div v-if="displayNews" v-for="newR in news">
+                    <h5>{{ newR.title }}</h5>
+                    {{ newR.abstract }}<br />
+                    <em>Published on {{ newR.releasedate }}.</em><br />
+                    <a :href="newR.url" target="_blank">Read more!</a><br /><br />
                   </div>
-                  <p v-if="visitorCenters.length==0 && displaySpinnerVisit == false">No visitor centers to show!</p>
-                </div> -->
+                  <p v-if="news.length==0 && displaySpinnerNews == false">No news releases to show!</p>
+                </div>
 
               </div>
 

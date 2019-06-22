@@ -38,6 +38,15 @@ function convertLatLong(latLong) {
   return ret
 }
 
+// Converts NPS's newsreleases releasedate string
+// Ex: "Published on 2019-06-12 09:03:00.0"
+function convertDate(date) {
+  // Only need day, month, and year
+  let dateArr = date.split(" ")[0].split("-")
+  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  return `${months[parseInt(dateArr[1])]} ${dateArr[2]}, ${dateArr[0]}`
+}
+
 new Vue({
   el: '#wrapper',
   data: {
@@ -68,6 +77,10 @@ new Vue({
     displayEvents: false,
     loadedEvents: false,
     displaySpinnerEvent: false,
+    news: [],
+    displayNews: false,
+    loadedNews: false,
+    displaySpinnerNews: false,
     noResults: false,
     emptyField: false,
     q: '',
@@ -408,6 +421,38 @@ new Vue({
 
        // console.log("this.events:")
        // console.log(this.events)
+    }
+  },
+  // Displays news releases when respective accordion is triggered
+  getNews: async function() {
+    // Check if already populated
+    if (!this.loadedNews) {
+      // Display spinner
+      this.displaySpinnerNews = true
+
+      // Get articles
+      await axios.get(`https://developer.nps.gov/api/v1/newsreleases?parkCode=${this.selectedPark.parkCode}&limit=9&api_key=${apiKey}`).then(response => (this.news = response.data.data)).catch(error => {
+         console.log(error)
+       })
+
+       // Reformat releasedate
+       this.news.forEach(newR => {
+         newR.releasedate = convertDate(newR.releasedate)
+       })
+
+       // Hide spinner and show results
+       this.displaySpinnerNews = false
+       this.loadedNews = true
+       this.displayNews = true
+
+       // Need to reopen accordion
+       document.getElementById("accNews").click()
+       setTimeout(function(){
+         document.getElementById("accNews").click()
+        }, 100)
+
+       // console.log("this.news:")
+       // console.log(this.news)
     }
   },
   test: function (e) {
