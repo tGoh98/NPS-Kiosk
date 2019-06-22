@@ -108,8 +108,8 @@
           <div class="spinner-border"></div>
         </section>
 
-        <!-- <section class="wrapper style1 align-center" :style="{ display: displayPark }"> -->
-        <section class="wrapper style1 align-center">
+        <section class="wrapper style1 align-center" :style="{ display: displayPark }">
+        <!-- <section class="wrapper style1 align-center"> -->
           <hr>
 					<div class="content" style="margin: 0 10%;">
 						<h3>{{ selectedPark.fullName }}</h3>
@@ -129,12 +129,12 @@
                   <div class="column right">
                     <h4>Contact us:</h4>
                     <p>
-                      <!-- <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
+                      <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
                       <span style="font-weight:500;">Email:</span> <a :href=`mailto:${selectedPark.contacts.emailAddresses[0].emailAddress}`>{{ selectedPark.contacts.emailAddresses[0].emailAddress }}</a><br />
-                      <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br /> -->
-                      <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
+                      <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br />
+                      <!-- <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
                       <span style="font-weight:500;">Email:</span> example@gmail.com<br />
-                      <span style="font-weight:500;">Website:</span> www.google.com<br />
+                      <span style="font-weight:500;">Website:</span> www.google.com<br /> -->
                     </p>
                   </div>
                 </div>
@@ -170,11 +170,11 @@
                 <!-- Info -->
                 <div class="accordion" v-on:click="showInfo = true"><img src="images/infoIcon.svg" alt=""> Basic Information</div>
                 <div class="panel" v-if="showInfo">
-                  <strong>{{ selectedPark.fullName }}</strong><br /><br />
-                  State(s): <em>{{ selectedPark.states.replace(new RegExp(",", 'g'), ", ") }}</em><br /><br />
-                  Designation: <em>{{ selectedPark.designation }}</em><br /><br />
-                  Directions: <em>{{ selectedPark.directionsInfo }}</em><br /><br />
-                  Weather: <em>{{ selectedPark.weatherInfo }}</em><br /><br />
+                  <strong>{{ selectedPark.fullName }}</strong><br />
+                  <strong>State(s):</strong> {{ selectedPark.states.replace(new RegExp(",", 'g'), ", ") }}<br />
+                  <strong>Designation:</strong> {{ selectedPark.designation }}<br />
+                  <strong>Directions:</strong> {{ selectedPark.directionsInfo }}<br />
+                  <strong>Weather:</strong> {{ selectedPark.weatherInfo }}<br /><br />
                 </div>
 
                 <!-- Campgrounds  -->
@@ -246,9 +246,53 @@
                   </div>
                   <p v-if="news.length==0 && displaySpinnerNews == false">No news releases to show!</p>
                 </div>
-
               </div>
 
+              <!-- Learn About section -->
+              <div style="text-align: Left;">
+                <br />
+                <h4>Learn All About {{ selectedPark.fullName }}!</h4>
+
+                <!-- Lesson Plans -->
+                <div class="accordion" v-on:click="getLessons" id="accLess"><img src="images/infoIcon.svg" alt=""> Lesson Plans</div>
+                <div class="panel">
+                  <div class="spinner-border" v-if="displaySpinnerLessons"></div>
+                  <div v-if="displayLessons" v-for="lesson in lessons">
+                    <h5>{{ lesson.title }}</h5>
+                    <strong>Subject:</strong> {{ lesson.subject.replace(new RegExp(",", 'g'), ", ") }}<br />
+                    <strong>Grade level:</strong> {{ lesson.gradelevel }}<br />
+                    <strong>Summary:</strong> {{ lesson.questionobjective }}<br />
+                    <a :href="lesson.url" target="_blank">Learn more!</a><br /><br />
+                  </div>
+                  <p v-if="lessons.length==0 && displaySpinnerLessons == false">No lesson plans to show!</p>
+                </div>
+
+                <!-- Relevant people -->
+                <div class="accordion" v-on:click="getPeople" id="accPeople"><img src="images/infoIcon.svg" alt=""> Relevant People</div>
+                <div class="panel">
+                  <div class="spinner-border" v-if="displaySpinnerPeople"></div>
+                  <div v-if="displayPeople" v-for="ppl in people">
+                    <h5>{{ ppl.title }}</h5>
+                    {{ ppl.listingdescription }}<br />
+                    <a :href="ppl.url" target="_blank">Learn more!</a><br /><br />
+                  </div>
+                  <p v-if="people.length==0 && displaySpinnerPeople == false">No people to show!</p>
+                </div>
+
+                <!-- Relevant places -->
+                <div class="accordion" v-on:click="getPlaces" id="accPlaces"><img src="images/infoIcon.svg" alt=""> Relevant Places</div>
+                <div class="panel">
+                  <div class="spinner-border" v-if="displaySpinnerPlaces"></div>
+                  <div v-if="displayPlaces" v-for="place in places">
+                    <h5>{{ place.title }}</h5>
+                    {{ place.listingdescription }}<br />
+                    <a :href="place.url" target="_blank">Learn more!</a><br /><br />
+                  </div>
+                  <p v-if="places.length==0 && displaySpinnerPlaces == false">No places to show!</p>
+                </div>
+              </div>
+          <br /><br />
+          <button onclick="scrollToTop()" class="button fit">Search for another park</button>
 					</div>
 				</section>
 
@@ -299,6 +343,12 @@
           panel.style.maxHeight = panel.scrollHeight + "px";
         }
       });
+    }
+
+    // Button scrolling code
+    function scrollToTop() {
+      var top = document.getElementById("first").offsetTop
+      window.scrollTo({ top: top, behavior: 'smooth' })
     }
     </script>
 

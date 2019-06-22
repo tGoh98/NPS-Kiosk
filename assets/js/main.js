@@ -1,4 +1,8 @@
-const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
+// Contains the main js code
+
+// Need to find some way to hide this with Heroku
+// const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
+const apiKey = 'nnTcMslLx5XmDObX8uLOHgetCev35MI2ZUaxQtHy'
 
 // Compute distance between two sets of lat long coordinates
 // Haversine formula
@@ -81,6 +85,20 @@ new Vue({
     displayNews: false,
     loadedNews: false,
     displaySpinnerNews: false,
+    lessons: [],
+    displayLessons: false,
+    loadedLessons: false,
+    displaySpinnerLessons: false,
+    noResults: false,
+    emptyField: false,
+    people: [],
+    displayPeople: false,
+    loadedPeople: false,
+    displaySpinnerPeople: false,
+    places: [],
+    displayPlaces: false,
+    loadedPlaces: false,
+    displaySpinnerPlaces: false,
     noResults: false,
     emptyField: false,
     q: '',
@@ -400,12 +418,16 @@ new Vue({
          console.log(error)
        })
 
-       // Populate feeinfo if needed and strip html tags from desc
+       // Populate feeinfo and location if needed and strip html tags from desc
        this.events.forEach(event => {
          if (event.feeinfo == "") {
            event.feeinfo = "No data provided"
          }
-         event.description = event.description.replace(new RegExp("<[/a-zA-Z0-9]+>", 'g'), "")
+         if (event.location == "") {
+           event.location = "No location provided"
+         }
+         console.log(event.description)
+         event.description = event.description.replace(new RegExp("<[^>]*>", 'g'), "")
        })
 
        // Hide spinner and show results
@@ -453,6 +475,78 @@ new Vue({
 
        // console.log("this.news:")
        // console.log(this.news)
+    }
+  },
+  // Displays lesson plans when respective accordion is triggered
+  getLessons: async function() {
+    // Check if already populated
+    if (!this.loadedLessons) {
+      // Display spinner
+      this.displaySpinnerLessons = true
+
+      // Get articles
+      await axios.get(`https://developer.nps.gov/api/v1/lessonplans?parkCode=${this.selectedPark.parkCode}&api_key=${apiKey}`).then(response => (this.lessons = response.data.data)).catch(error => {
+         console.log(error)
+       })
+
+       // Hide spinner and show results
+       this.displaySpinnerLessons = false
+       this.loadedLessons = true
+       this.displayLessons = true
+
+       // Need to reopen accordion
+       document.getElementById("accLess").click()
+       setTimeout(function(){
+         document.getElementById("accLess").click()
+        }, 100)
+    }
+  },
+  // Displays relevant people when respective accordion is triggered
+  getPeople: async function() {
+    // Check if already populated
+    if (!this.loadedPeople) {
+      // Display spinner
+      this.displaySpinnerPeople = true
+
+      // Get articles
+      await axios.get(`https://developer.nps.gov/api/v1/people?parkCode=${this.selectedPark.parkCode}&limit=10&api_key=${apiKey}`).then(response => (this.people = response.data.data)).catch(error => {
+        console.log(error)
+      })
+
+      // Hide spinner and show results
+      this.displaySpinnerPeople = false
+      this.loadedPeople = true
+      this.displayPeople = true
+
+      // Need to reopen accordion
+      document.getElementById("accPeople").click()
+      setTimeout(function(){
+        document.getElementById("accPeople").click()
+      }, 100)
+    }
+  },
+  // Displays lesson plans when respective accordion is triggered
+  getPlaces: async function() {
+    // Check if already populated
+    if (!this.loadedPlaces) {
+      // Display spinner
+      this.displaySpinnerPlaces = true
+
+      // Get articles
+      await axios.get(`https://developer.nps.gov/api/v1/places?parkCode=${this.selectedPark.parkCode}&limit=10&api_key=${apiKey}`).then(response => (this.places = response.data.data)).catch(error => {
+         console.log(error)
+       })
+
+       // Hide spinner and show results
+       this.displaySpinnerPlaces = false
+       this.loadedPlaces = true
+       this.displayPlaces = true
+
+       // Need to reopen accordion
+       document.getElementById("accPlaces").click()
+       setTimeout(function(){
+         document.getElementById("accPlaces").click()
+        }, 100)
     }
   },
   test: function (e) {
