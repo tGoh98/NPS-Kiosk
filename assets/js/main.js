@@ -1,7 +1,7 @@
 // Contains the main js code
 
-// Need to find some way to hide this with Heroku
-const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
+// Get apiKey
+const apiKey = process.env.nps_api_key
 
 // Compute distance between two sets of lat long coordinates
 // Haversine formula
