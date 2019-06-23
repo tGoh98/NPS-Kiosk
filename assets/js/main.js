@@ -269,8 +269,6 @@ new Vue({
       this.selectedParkImageUrl = this.selectedPark.images[1].url
     }
 
-    console.log(this.selectedPark)
-
     // Error checking for empty values
     if (this.selectedPark.url == "") {
       this.selectedPark.url = "https://www.nps.gov/index.htm"

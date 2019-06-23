@@ -4,6 +4,7 @@ let accordionStatus = [
   { id: "accCamp", status: 0 },
   { id: "accVC", status: 0 },
   { id: "accArt", status: 0 },
+  { id: "accEvent", status: 0 },
   { id: "accNews", status: 0 },
   { id: "accLess", status: 0 },
   { id: "accPeople", status: 0 },
