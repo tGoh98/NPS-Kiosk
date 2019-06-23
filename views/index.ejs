@@ -124,7 +124,6 @@
                 <div class="column left" style="padding-left: 15px;">
                   <h4>Description</h4>
                   <p>{{ selectedPark.description }}</p>
-                  <!-- <p>Visit Yellowstone and experience the world's first national park. Marvel at a volcano's hidden power rising up in colorful hot springs, mudpots, and geysers. Explore mountains, forests, and lakes to watch wildlife and witness the drama of the natural world unfold. Discover the history that led to the conservation of our national treasures 'for the benefit and enjoyment of the people.'</p> -->
                   </div>
                   <div class="column right">
                     <h4>Contact us:</h4>
@@ -209,7 +208,7 @@
                 <h4>What's Going on at {{ selectedPark.fullName }}?</h4>
 
                 <!-- Articles -->
-                <div class="accordion" v-on:click="getArticles" id="accArt"><img src="images/infoIcon.svg" alt=""> Articles</div>
+                <div class="accordion" v-on:click="getArticles" id="accArt"><img src="images/articlesIcon.svg" alt=""> Articles</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerArticle"></div>
                   <div v-if="displayArticles" v-for="article in articles">
@@ -222,20 +221,20 @@
                 </div>
 
                 <!-- Events  -->
-                <div class="accordion" v-on:click="getEvents" id="accEvent"><img src="images/campgroundIcon.svg" alt=""> Events</div>
+                <div class="accordion" v-on:click="getEvents" id="accEvent"><img src="images/eventsIcon.svg" alt=""> Events</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerEvent"></div>
                   <div v-if="displayEvents" v-for="event in events">
                     <strong>Location:</strong> {{ event.location }}<br />
                     <strong>Description:</strong> {{ event.description }}<br />
                     <strong>Cost:</strong> {{ event.feeinfo }}<br />
-                    <em>Contact {{ event.contacttelephonenumber }} for more information.</em><br /><br />
+                    <em>{{ event.contacttelephonenumber }}</em><br /><br />
                   </div>
                   <p v-if="events.length==0 && displaySpinnerEvent == false">No events to show!</p>
                 </div>
 
                 <!-- News Releases -->
-                <div class="accordion" v-on:click="getNews" id="accNews"><img src="images/visitorCenterIcon.svg" alt=""> News Releases</div>
+                <div class="accordion" v-on:click="getNews" id="accNews"><img src="images/newsIcon.svg" alt=""> News Releases</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerNews"></div>
                   <div v-if="displayNews" v-for="newR in news">
@@ -254,7 +253,7 @@
                 <h4>Learn All About {{ selectedPark.fullName }}!</h4>
 
                 <!-- Lesson Plans -->
-                <div class="accordion" v-on:click="getLessons" id="accLess"><img src="images/infoIcon.svg" alt=""> Lesson Plans</div>
+                <div class="accordion" v-on:click="getLessons" id="accLess"><img src="images/lessonsIcon.svg" alt=""> Lesson Plans</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerLessons"></div>
                   <div v-if="displayLessons" v-for="lesson in lessons">
@@ -268,7 +267,7 @@
                 </div>
 
                 <!-- Relevant people -->
-                <div class="accordion" v-on:click="getPeople" id="accPeople"><img src="images/infoIcon.svg" alt=""> Relevant People</div>
+                <div class="accordion" v-on:click="getPeople" id="accPeople"><img src="images/peopleIcon.svg" alt=""> Relevant People</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerPeople"></div>
                   <div v-if="displayPeople" v-for="ppl in people">
@@ -280,7 +279,7 @@
                 </div>
 
                 <!-- Relevant places -->
-                <div class="accordion" v-on:click="getPlaces" id="accPlaces"><img src="images/infoIcon.svg" alt=""> Relevant Places</div>
+                <div class="accordion" v-on:click="getPlaces" id="accPlaces"><img src="images/placesIcon.svg" alt=""> Relevant Places</div>
                 <div class="panel">
                   <div class="spinner-border" v-if="displaySpinnerPlaces"></div>
                   <div v-if="displayPlaces" v-for="place in places">
@@ -315,7 +314,10 @@
 		<script src="js/util.js"></script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Vue devlopment version -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Vue production version -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
 
