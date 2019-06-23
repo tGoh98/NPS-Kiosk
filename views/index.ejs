@@ -109,11 +109,9 @@
         </section>
 
         <section class="wrapper style1 align-center" :style="{ display: displayPark }">
-        <!-- <section class="wrapper style1 align-center"> -->
           <hr>
 					<div class="content" style="margin: 0 10%;">
 						<h3>{{ selectedPark.fullName }}</h3>
-						<!-- <h3>Yellowstone National Park</h3> -->
             <div class="image">
   						<img :src="selectedParkImageUrl" alt="park image" style="max-height:500px; max-width:1000px;"/>
   					</div>
@@ -134,9 +132,6 @@
                       <span v-if="selectedPark.contacts.emailAddresses[0].emailAddress == 'No data provided'">No data provided</span>
                       <br />
                       <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br />
-                      <!-- <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
-                      <span style="font-weight:500;">Email:</span> example@gmail.com<br />
-                      <span style="font-weight:500;">Website:</span> www.google.com<br /> -->
                     </p>
                   </div>
                 </div>
@@ -146,10 +141,6 @@
               <div style="text-align: Left;">
                 <h4>Alerts</h4>
                 <p v-if="alerts.length == 0">None!</p>
-                <!-- Doesn't work
-                <ul>
-                  <div v-for="alert in alerts"><li :style="{ 'list-style-image': alert.icon }">{{ alert.description }}</li></div>
-                </ul> -->
 
                 <div class="row">
                   <div class="column left2">
@@ -318,9 +309,9 @@
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Vue devlopment version -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <!-- Vue production version -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
 

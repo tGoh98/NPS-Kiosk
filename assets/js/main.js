@@ -1,8 +1,7 @@
 // Contains the main js code
 
 // Need to find some way to hide this with Heroku
-// const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
-const apiKey = 'nnTcMslLx5XmDObX8uLOHgetCev35MI2ZUaxQtHy'
+const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
 
 // Compute distance between two sets of lat long coordinates
 // Haversine formula
@@ -242,9 +241,6 @@ new Vue({
         var top = document.getElementById("resultsSection").offsetTop
         window.scrollTo({ top: top, behavior: 'smooth' })
      }, 100)
-
-     // console.log("this.info")
-     // console.log(this.info)
   },
   // Checks search q field for valid input
   trySearch: function () {
@@ -324,9 +320,6 @@ new Vue({
     // Load section
     this.displaySpinner2 = false
     this.displayPark = 'inline'
-
-    // console.log("this.alerts:")
-    // console.log(this.alerts)
   },
   // Displays selected park info
   getInfo: function() {
@@ -368,9 +361,6 @@ new Vue({
        setTimeout(function(){
          document.getElementById("accCamp").click()
         }, 100)
-
-       // console.log("this.campgrounds:")
-       // console.log(this.campgrounds)
     }
   },
   // Displays visitor centers when respective accordion is triggered
@@ -414,9 +404,6 @@ new Vue({
        setTimeout(function(){
          document.getElementById("accVC").click()
         }, 100)
-
-       // console.log("this.visitorCenters:")
-       // console.log(this.visitorCenters)
     }
   },
   // Displays articles when respective accordion is triggered
@@ -456,9 +443,6 @@ new Vue({
        setTimeout(function(){
          document.getElementById("accArt").click()
         }, 100)
-
-       // console.log("this.articles:")
-       // console.log(this.articles)
     }
   },
   // Displays events when respective accordion is triggered
@@ -502,9 +486,6 @@ new Vue({
        setTimeout(function(){
          document.getElementById("accEvent").click()
         }, 100)
-
-       // console.log("this.events:")
-       // console.log(this.events)
     }
   },
   // Displays news releases when respective accordion is triggered
@@ -545,8 +526,6 @@ new Vue({
          document.getElementById("accNews").click()
         }, 100)
 
-       // console.log("this.news:")
-       // console.log(this.news)
     }
   },
   // Displays lesson plans when respective accordion is triggered
