@@ -6,7 +6,6 @@ const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
 // Compute distance between two sets of lat long coordinates
 // Haversine formula
 function distance(lat1, lon1, lat2, lon2) {
-  // console.log(lat1, lon1, lat2, lon2)
   var R = 6371 // Radius of the earth in km
   var dLat = rad(lat2-lat1)  // rad below
   var dLon = rad(lon2-lon1)
@@ -35,7 +34,6 @@ function convertLatLongPark(latLong) {
 function convertLatLong(latLong) {
   let arr = latLong.split(",")
   var ret = []
-  // console.log(arr[0], arr[1]);
   ret.push(parseFloat(arr[0].substring(5)))
   ret.push(parseFloat(arr[1].substring(5)))
   return ret
@@ -308,7 +306,6 @@ new Vue({
      })
 
     // Collapse accordions
-    console.log(accordionStatus)
     this.accordionStatus.forEach(acc => {
       if (acc.status == 1) {
         document.getElementById(acc.id).click()
@@ -540,7 +537,6 @@ new Vue({
       await axios.get(`https://developer.nps.gov/api/v1/lessonplans?parkCode=${this.selectedPark.parkCode}&api_key=${apiKey}`).then(response => (this.lessons = response.data.data)).catch(error => {
          console.log(error)
        })
-       console.log(this.lessons)
 
        // Strip html tags from summary and check for empty values
        this.lessons.forEach(lesson => {
@@ -558,7 +554,6 @@ new Vue({
          }
          lesson.questionobjective = lesson.questionobjective.replace(new RegExp("<[^>]*>", 'g'), "")
        })
-       console.log(this.lessons)
 
        // Hide spinner and show results
        this.displaySpinnerLessons = false
