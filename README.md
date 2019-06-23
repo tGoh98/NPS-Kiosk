@@ -4,10 +4,10 @@
 ## Features
 * Efficient usage of the National Parks API via Vue.js and Axios 
 * Intuitive, easy to navigate interface
-* Option to filter search results by state, designation, and keyword
+* Option to filter searches by state, designation, and keyword
 * Displays details about a park's visitor center, campgrounds, alerts, articles, events, news releases, and educational information (lesson plans, relevant people, and places)
 * Utilizes appropriate NPS symbols and latitude/longitude data
-* Responsive and mobile-friendly
+* Responsive design for a consistent experience across browsers and devices (only Chrome, Firefox, and Safari are supported currently)
 * Live deployed website on a custom Heroku domain: <http://nps-api-webapp.herokuapp.com/>
 
 ## How to run
