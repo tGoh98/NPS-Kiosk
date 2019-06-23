@@ -7,7 +7,7 @@
 * Option to filter searches by state, designation, and keyword
 * Displays details about a park's visitor center, campgrounds, alerts, articles, events, news releases, and educational information (lesson plans, relevant people, and places)
 * Utilizes appropriate NPS symbols and latitude/longitude data
-* Responsive design for a consistent experience across browsers and devices (only Chrome, Firefox, and Safari are supported currently)
+* Responsive design for a consistent experience across browsers and devices (only Chrome, Firefox, and Safari are supported currently, use Chrome for best results)
 * Live deployed website on a custom Heroku domain: <http://nps-api-webapp.herokuapp.com/>
 
 ## How to run
