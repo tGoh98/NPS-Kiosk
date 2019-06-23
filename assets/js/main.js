@@ -1,7 +1,7 @@
 // Contains the main js code
 
-// Get apiKey
-const apiKey = process.env.nps_api_key
+// Get api key
+const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
 
 // Compute distance between two sets of lat long coordinates
 // Haversine formula
