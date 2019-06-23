@@ -305,12 +305,20 @@ new Vue({
        }
      })
 
-    // Collapse accordions
+    // Reset accordions
     this.accordionStatus.forEach(acc => {
       if (acc.status == 1) {
         document.getElementById(acc.id).click()
       }
     })
+    this.loadedCampgrounds = false
+    this.loadedVisitorCenters = false
+    this.loadedArticles = false
+    this.loadedEvents = false
+    this.loadedNews = false
+    this.loadedLessons = false
+    this.loadedPeople = false
+    this.loadedPlaces = false
 
     // Load section
     this.displaySpinner2 = false
@@ -318,8 +326,8 @@ new Vue({
   },
   // Displays selected park info
   getInfo: function() {
-    this.showInfo = true
     this.accordionStatus[0].status ^= 1
+    this.showInfo = true
   },
   // Displays the campgrounds when respective accordion is triggered
   getCampgrounds: async function() {
@@ -639,6 +647,65 @@ new Vue({
        setTimeout(function(){
          document.getElementById("accPlaces").click()
         }, 100)
+    }
+  },
+  // Expand Plan Your Visit Accordions
+  expand1: async function() {
+    for (var i=0; i<3; i++) {
+      if (this.accordionStatus[i].status == 0) {
+        document.getElementById(this.accordionStatus[i].id).click()
+        this.accordionStatus[i].status = 1
+      }
+    }
+    // Quick fix for buggy accordion
+    document.getElementById(this.accordionStatus[0].id).click()
+    setTimeout(function(){
+      document.getElementById("accInfo").click()
+    }, 10)
+  },
+  // Collapse Plan Your Visit Accordions
+  collapse1: function() {
+    for (var i=0; i<3; i++) {
+      if (this.accordionStatus[i].status == 1) {
+        document.getElementById(this.accordionStatus[i].id).click()
+        this.accordionStatus[i].status = 0
+      }
+    }
+  },
+  // Expand What's Going on Accordions
+  expand2: function() {
+    for (var i=3; i<6; i++) {
+      if (this.accordionStatus[i].status == 0) {
+        document.getElementById(this.accordionStatus[i].id).click()
+        this.accordionStatus[i].status = 1
+      }
+    }
+  },
+  // Collapse What's Going on Accordions
+  collapse2: function() {
+    for (var i=3; i<6; i++) {
+      if (this.accordionStatus[i].status == 1) {
+        document.getElementById(this.accordionStatus[i].id).click()
+        this.accordionStatus[i].status = 0
+      }
+    }
+  },
+  // Expand Learn About Accordions
+  expand3: function() {
+    for (var i=6; i<9; i++) {
+      if (this.accordionStatus[i].status == 0) {
+        document.getElementById(this.accordionStatus[i].id).click()
+        this.accordionStatus[i].status = 1
+      }
+    }
+  },
+  // Collapse Learn About Accordions
+  collapse3: function() {
+    for (var i=6; i<9; i++) {
+      if (this.accordionStatus[i].status == 1) {
+        document.getElementById(this.accordionStatus[i].id).click()
+        this.accordionStatus[i].status = 0
+      }
     }
   },
   test: function (e) {

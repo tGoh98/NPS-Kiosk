@@ -160,6 +160,7 @@
               <!-- Plan Your Visit section -->
               <div style="text-align: Left;">
                 <h4>Plan Your Visit</h4>
+                <a href="javascript:void(0);" v-on:click="expand1">Expand All</a> | <a href="javascript:void(0);" v-on:click="collapse1">Collapse All</a>
 
                 <!-- Info -->
                 <div class="accordion" v-on:click="getInfo" id="accInfo"><img src="images/infoIcon.svg" alt=""> Basic Information</div>
@@ -201,6 +202,7 @@
               <div style="text-align: Left;">
                 <br />
                 <h4>What's Going on at {{ selectedPark.fullName }}?</h4>
+                <a href="javascript:void(0);" v-on:click="expand2">Expand All</a> | <a href="javascript:void(0);" v-on:click="collapse2">Collapse All</a>
 
                 <!-- Articles -->
                 <div class="accordion" v-on:click="getArticles" id="accArt"><img src="images/articlesIcon.svg" alt=""> Articles</div>
@@ -246,6 +248,7 @@
               <div style="text-align: Left;">
                 <br />
                 <h4>Learn All About {{ selectedPark.fullName }}!</h4>
+                <a href="javascript:void(0);" v-on:click="expand3">Expand All</a> | <a href="javascript:void(0);" v-on:click="collapse3">Collapse All</a>
 
                 <!-- Lesson Plans -->
                 <div class="accordion" v-on:click="getLessons" id="accLess"><img src="images/lessonsIcon.svg" alt=""> Lesson Plans</div>
