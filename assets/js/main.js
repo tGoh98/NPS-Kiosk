@@ -1,6 +1,7 @@
 // Contains the main js code
 
 // Get api key
+// Need to figure out how to hide this on heroku
 const apiKey = 'GvdIIgwFiaoPxjBJSUlSedvsGCcUMGBCcoQOLs33'
 
 // Compute distance between two sets of lat long coordinates
