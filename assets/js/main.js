@@ -62,6 +62,7 @@ new Vue({
     selectedPark: selectedPark, // Filler data imported from data.js
     selectedParkImageUrl: "images/squirrel.jpg",
     displayPark: 'none',
+    accordionStatus : accordionStatus, // From data.js
     displaySpinner2: false,
     alerts: [],
     showInfo: false,
@@ -272,6 +273,28 @@ new Vue({
       this.selectedParkImageUrl = this.selectedPark.images[1].url
     }
 
+    console.log(this.selectedPark)
+
+    // Error checking for empty values
+    if (this.selectedPark.url == "") {
+      this.selectedPark.url = "https://www.nps.gov/index.htm"
+    }
+    if (this.selectedPark.directionsInfo == "") {
+      this.selectedPark.directionsInfo = "No data provided"
+    }
+    if (this.selectedPark.designation == "") {
+      this.selectedPark.designation = "No data provided"
+    }
+    if (this.selectedPark.weatherInfo == "") {
+      this.selectedPark.weatherInfo = "No data provided"
+    }
+    if (this.selectedPark.contacts.phoneNumbers.length == 0) {
+      this.selectedPark.contacts.phoneNumbers.push({ "phoneNumber" : "No data provided" })
+    }
+    if (this.selectedPark.contacts.emailAddresses.length == 0) {
+      this.selectedPark.contacts.emailAddresses.push({ "emailAddress" : "No data provided" })
+    }
+
     // Get alerts
     await axios.get(`https://developer.nps.gov/api/v1/alerts?parkCode=${parkObj.parkCode}&api_key=${apiKey}`).then(response => (this.alerts = response.data.data)).catch(error => {
        console.log(error)
@@ -290,6 +313,14 @@ new Vue({
        }
      })
 
+    // Collapse accordions
+    console.log(accordionStatus)
+    this.accordionStatus.forEach(acc => {
+      if (acc.status == 1) {
+        document.getElementById(acc.id).click()
+      }
+    })
+
     // Load section
     this.displaySpinner2 = false
     this.displayPark = 'inline'
@@ -297,8 +328,16 @@ new Vue({
     // console.log("this.alerts:")
     // console.log(this.alerts)
   },
+  // Displays selected park info
+  getInfo: function() {
+    this.showInfo = true
+    this.accordionStatus[0].status ^= 1
+  },
   // Displays the campgrounds when respective accordion is triggered
   getCampgrounds: async function() {
+    // Update accordion
+    this.accordionStatus[1].status ^= 1
+
     // Check if already populated
     if (!this.loadedCampgrounds) {
       // Display spinner
@@ -336,6 +375,9 @@ new Vue({
   },
   // Displays visitor centers when respective accordion is triggered
   getVisitorCenters: async function() {
+    // Update accordion
+    this.accordionStatus[2].status ^= 1
+
     // Check if already populated
     if (!this.loadedVisitorCenters) {
       // Display spinner
@@ -354,6 +396,11 @@ new Vue({
            vc.distance = distance(parkLL[0], parkLL[1], vcLL[0], vcLL[1]) + " mi"
          } else {
            vc.distance = "Latitude and longitude coordinates not provided by NPS"
+         }
+
+         // Check for empty url
+         if (vc.url == "") {
+           vc.url = "https://www.nps.gov/index.htm"
          }
        })
 
@@ -374,6 +421,9 @@ new Vue({
   },
   // Displays articles when respective accordion is triggered
   getArticles: async function() {
+    // Update accordion
+    this.accordionStatus[3].status ^= 1
+
     // Check if already populated
     if (!this.loadedArticles) {
       // Display spinner
@@ -388,6 +438,11 @@ new Vue({
        this.articles.forEach(article => {
          if (article.listingimage.url == "") {
            article.listingimage.url = 'images/squirrel.jpg'
+         }
+
+         // Check for empty url
+         if (article.url == "") {
+           article.url = "https://www.nps.gov/index.htm"
          }
        })
 
@@ -408,6 +463,9 @@ new Vue({
   },
   // Displays events when respective accordion is triggered
   getEvents: async function() {
+    // Update accordion
+    this.accordionStatus[4].status ^= 1
+
     // Check if already populated
     if (!this.loadedEvents) {
       // Display spinner
@@ -418,7 +476,7 @@ new Vue({
          console.log(error)
        })
 
-       // Populate feeinfo and location if needed and strip html tags from desc
+       // Populate properties if needed and strip html tags from desc
        this.events.forEach(event => {
          if (event.feeinfo == "") {
            event.feeinfo = "No data provided"
@@ -426,7 +484,11 @@ new Vue({
          if (event.location == "") {
            event.location = "No location provided"
          }
-         console.log(event.description)
+         if (event.contacttelephonenumber == "") {
+           event.contacttelephonenumber = "No phone number provided."
+         } else {
+           event.contacttelephonenumber = `Contact ${event.contacttelephonenumber} for more information.`
+         }
          event.description = event.description.replace(new RegExp("<[^>]*>", 'g'), "")
        })
 
@@ -447,6 +509,9 @@ new Vue({
   },
   // Displays news releases when respective accordion is triggered
   getNews: async function() {
+    // Update accordion
+    this.accordionStatus[5].status ^= 1
+
     // Check if already populated
     if (!this.loadedNews) {
       // Display spinner
@@ -457,9 +522,16 @@ new Vue({
          console.log(error)
        })
 
-       // Reformat releasedate
+       // Reformat releasedate and check for empty values
        this.news.forEach(newR => {
-         newR.releasedate = convertDate(newR.releasedate)
+         if (newR.releaseDate == "") {
+           newR.releaseDate = "No date provided"
+         } else {
+           newR.releasedate = convertDate(newR.releasedate)
+         }
+         if (newR.url == "") {
+           newR.url = "https://www.nps.gov/index.htm"
+         }
        })
 
        // Hide spinner and show results
@@ -479,15 +551,37 @@ new Vue({
   },
   // Displays lesson plans when respective accordion is triggered
   getLessons: async function() {
+    // Update accordion
+    this.accordionStatus[6].status ^= 1
+
     // Check if already populated
     if (!this.loadedLessons) {
       // Display spinner
       this.displaySpinnerLessons = true
 
-      // Get articles
+      // Get lessons
       await axios.get(`https://developer.nps.gov/api/v1/lessonplans?parkCode=${this.selectedPark.parkCode}&api_key=${apiKey}`).then(response => (this.lessons = response.data.data)).catch(error => {
          console.log(error)
        })
+       console.log(this.lessons)
+
+       // Strip html tags from summary and check for empty values
+       this.lessons.forEach(lesson => {
+         if (lesson.url == "") {
+           lesson.url = "https://www.nps.gov/index.htm"
+         }
+         if (lesson.subject == "") {
+           lesson.subject = "No data provided"
+         }
+         if (lesson.gradelevel == "") {
+           lesson.gradelevel = "No data provided"
+         }
+         if (lesson.questionobjective == "") {
+           lesson.questionobjective = "No data provided"
+         }
+         lesson.questionobjective = lesson.questionobjective.replace(new RegExp("<[^>]*>", 'g'), "")
+       })
+       console.log(this.lessons)
 
        // Hide spinner and show results
        this.displaySpinnerLessons = false
@@ -503,14 +597,27 @@ new Vue({
   },
   // Displays relevant people when respective accordion is triggered
   getPeople: async function() {
+    // Update accordion
+    this.accordionStatus[7].status ^= 1
+
     // Check if already populated
     if (!this.loadedPeople) {
       // Display spinner
       this.displaySpinnerPeople = true
 
-      // Get articles
+      // Get people
       await axios.get(`https://developer.nps.gov/api/v1/people?parkCode=${this.selectedPark.parkCode}&limit=10&api_key=${apiKey}`).then(response => (this.people = response.data.data)).catch(error => {
         console.log(error)
+      })
+
+      // Check for empty values
+      this.people.forEach(person => {
+        if (person.url == "") {
+          person.url = "https://www.nps.gov/index.htm"
+        }
+        if (person.listingdescription == "") {
+          person.listingdescription = "No data provided"
+        }
       })
 
       // Hide spinner and show results
@@ -525,16 +632,29 @@ new Vue({
       }, 100)
     }
   },
-  // Displays lesson plans when respective accordion is triggered
+  // Displays places when respective accordion is triggered
   getPlaces: async function() {
+    // Update accordion
+    this.accordionStatus[8].status ^= 1
+
     // Check if already populated
     if (!this.loadedPlaces) {
       // Display spinner
       this.displaySpinnerPlaces = true
 
-      // Get articles
+      // Get places
       await axios.get(`https://developer.nps.gov/api/v1/places?parkCode=${this.selectedPark.parkCode}&limit=10&api_key=${apiKey}`).then(response => (this.places = response.data.data)).catch(error => {
          console.log(error)
+       })
+
+       // Check for empty values
+       this.places.forEach(place => {
+         if (place.url == "") {
+           place.url = "https://www.nps.gov/index.htm"
+         }
+         if (place.listingdescription == "") {
+           place.listingdescription = "No data provided"
+         }
        })
 
        // Hide spinner and show results

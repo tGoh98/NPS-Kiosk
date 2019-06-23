@@ -129,7 +129,10 @@
                     <h4>Contact us:</h4>
                     <p>
                       <span style="font-weight:500;">Phone:</span> {{ selectedPark.contacts.phoneNumbers[0].phoneNumber }}<br />
-                      <span style="font-weight:500;">Email:</span> <a :href=`mailto:${selectedPark.contacts.emailAddresses[0].emailAddress}`>{{ selectedPark.contacts.emailAddresses[0].emailAddress }}</a><br />
+                      <span style="font-weight:500;">Email:</span>
+                      <a :href=`mailto:${selectedPark.contacts.emailAddresses[0].emailAddress}` v-if="selectedPark.contacts.emailAddresses[0].emailAddress != 'No data provided'">{{ selectedPark.contacts.emailAddresses[0].emailAddress }}</a>
+                      <span v-if="selectedPark.contacts.emailAddresses[0].emailAddress == 'No data provided'">No data provided</span>
+                      <br />
                       <span style="font-weight:500;">Website:</span> <a :href="selectedPark.url" target="_blank">{{ selectedPark.url }}</a><br />
                       <!-- <span style="font-weight:500;">Phone:</span> (684) 633-7082<br />
                       <span style="font-weight:500;">Email:</span> example@gmail.com<br />
@@ -167,7 +170,7 @@
                 <h4>Plan Your Visit</h4>
 
                 <!-- Info -->
-                <div class="accordion" v-on:click="showInfo = true"><img src="images/infoIcon.svg" alt=""> Basic Information</div>
+                <div class="accordion" v-on:click="getInfo" id="accInfo"><img src="images/infoIcon.svg" alt=""> Basic Information</div>
                 <div class="panel" v-if="showInfo">
                   <strong>{{ selectedPark.fullName }}</strong><br />
                   <strong>State(s):</strong> {{ selectedPark.states.replace(new RegExp(",", 'g'), ", ") }}<br />
@@ -349,6 +352,7 @@
 
     // Button scrolling code
     function scrollToTop() {
+      // Scroll to top
       var top = document.getElementById("first").offsetTop
       window.scrollTo({ top: top, behavior: 'smooth' })
     }
