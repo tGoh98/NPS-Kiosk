@@ -45,11 +45,11 @@
             </select>
             </li>
             <li>Search term:
-            <input id="qField" v-model="q" type="text" placeholder="Enter a keyword e.g. &quot;Yellowstone&quot;" style="margin-bottom: 15px;">
+            <input id="qField" v-model="q" type="text" placeholder="Enter a keyword e.g. &quot;park&quot;" style="margin-bottom: 15px;">
             <template v-if="emptyField">
               <b><i style="color:red;">Please enter a search term!</i></b><br>
             </template>
-            <button id="searchButton" v-on:click="trySearch" class="button fit">search</button>
+            <button id="searchButton" v-on:click="search" class="button fit">search</button>
           </ul>
 					</div>
         <div class="image">
